@@ -1,0 +1,148 @@
+- Aline Santana Cordeiro - 2017
+--------------------------------------------------------------------------------
+-                           Biblioteca Intrinsics-HMC                          -
+--------------------------------------------------------------------------------
+-
+-   A biblioteca Intrinsics-HMC foi desenvolvida com o propósito de simular a
+- execução das instruções do Hybrid Memory Cube (HMC), descritas na
+- especificação 2.1 do HMC (http://www.hybridmemorycube.org). A intenção é que,
+- fazendo o uso desta biblioteca em um programa em C ou C++, o traço que simula
+- a execução do programa em um HMC possa ser gerado utilizando o arquivo
+- executável como dado de entrada para o SiNUCA-Tracer, que interpreta as
+- instruções e gera os traços no formato específico para a simulação.
+-
+--------------------------------------------------------------------------------
+-
+- TIPOS DE DADOS
+-
+- __h64l1: Uma variável de 8 bytes (Equivalente a uint64_t)
+- __h64l2: Duas variáveis de 8 bytes cada (Equivalente a uint64_t[2])
+- __h128ll1: Uma variável de 16 bytes (Equivalente a uint128_t)
+-
+--------------------------------------------------------------------------------
+-
+- FUNÇÕES
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- ARITMÉTICAS:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- Dual 8-Byte Signed Add Immediate:
+- __h64l2 *_hmc64_saddimm_d(__h64l2 *mem_op, __h64l2 *imm_op)
+- Executa a soma de dois operandos de memória com dois operandos imediatos
+- (8-byte). Os operandos imediatos devem ser de 4-bytes e devem estar em
+- complemento de dois com preenchimento de zeros à esquerda, completando
+- 8-bytes. O resultado é salvo no endereço dos operandos de memória.
+-
+-
+- Single 16-Byte Signed Add Immediate:
+- __h128ll1 _hmc128_saddimm_s(__h128ll1 *mem_op, __h128ll1 *imm_op)
+- Executa a soma de um operando de memória (16-byte) com um operando imediato
+- em complemento de 2 com preenchimento de zeros à esquerda (16-byte). O
+- resultado é salvo no endereço do operando de memória.
+-
+-
+- 8-Byte Increment:
+- __h64l1 _hmc64_incr_s(__h64l1 *mem_op)
+- Incrementa um operando de memória (8-byte) em uma unidade e escreve o
+- resultado no endereço do operando de memória.
+-
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- LÓGICAS:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 8-Byte Bit Write:
+- __h64l1 _hmc64_bwrite_s(__h64l1 mem_op, __h64l1 imm_op, __h64l1 mask)
+- Usa-se o campo de máscara (8-Byte) para selecionar quais bits do operando
+- imediato (8-byte) devem ser escritos nas mesmas posições do operando de
+- memória (8-Byte).
+-
+- 16-Byte Swap:
+- __h128ll1 _hmc128_bswap_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o valor do operando imediato
+- (16-Byte) e retorna o operando de memória original (16-Byte).
+-
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- BOLEANAS:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 16-Byte AND:
+- __h128ll1 _hmc128_and_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o resultado da operação AND entre
+- o operando de memória (16-byte) e o operando imediato (16-byte) e retorna o
+- operando de memória original.
+-
+- 16-Byte NAND:
+- __h128ll1 _hmc128_nand_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o resultado da operação NAND entre
+- o operando de memória (16-byte) e o operando imediato (16-byte) e retorna o
+- operando de memória original.
+-
+- 16-Byte NOR:
+- __h128ll1 _hmc128_nor_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o resultado da operação NOR entre
+- o operando de memória (16-byte) e o operando imediato (16-byte) e retorna o
+- operando de memória original.
+-
+- 16-Byte OR:
+- __h128ll1 _hmc128_or_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o resultado da operação OR entre o
+- operando de memória (16-byte) e o operando imediato (16-byte) e retorna o
+- operando de memória original.
+-
+- 16-Byte XOR:
+- __h128ll1 _hmc128_xor_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o resultado da operação XOR entre
+- o operando de memória (16-byte) e o operando imediato (16-byte) e retorna o
+- operando de memória original.
+-
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- COMPARAÇÃO
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 8-Byte Compare and Swap if Greater Than:
+- __h128ll1 _hmc64_cmpswapgt_s(__h64l1 mem_op, __h64l1 imm_op)
+- Escreve no endereço do operando de memória o maior valor entre o operando de
+- memória (8-byte) e o operando imediato (8-byte) e retorna o operando de
+- memória original com preenchimento de zeros (16-byte).
+-
+- 8-Byte Compare and Swap if Less Than:
+- __h128ll1 _hmc64_cmpswaplt_s(__h64l1 mem_op, __h64l1 imm_op)
+- Escreve no endereço do operando de memória o menor valor entre o operando de
+- memória (8-byte) e o operando imediato (8-byte) e retorna o operando de
+- memória original com preenchimento de zeros (16-byte).
+-
+- 8-Byte Equal To:
+- __h64l1 _hmc64_cmpswapgt_s(__h64l1 mem_op, __h64l1 imm_op)
+- Verifica se o operando de memória (8-byte) é igual ao operando imediato
+- (8-byte). Retorna 1 caso forem iguais, 0 caso contrário.
+-
+- 16-Byte Compare and Swap if Greater Than:
+- __h128ll1 _hmc128_cmpswapgt_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o maior valor entre o operando de
+- memória (16-byte) e o operando imediato (16-byte) e retorna o operando de
+- memória original com preenchimento de zeros (16-byte).
+-
+- 16-Byte Compare and Swap if Less Than:
+- __h128ll1 _hmc128_cmpswaplt_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Escreve no endereço do operando de memória o menor valor entre o operando de
+- memória (16-byte) e o operando imediato (16-byte) e retorna o operando de
+- memória original com preenchimento de zeros (16-byte).
+-
+- 16-Byte Equal To:
+- uint32_t _hmc128_cmpswapgt_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Verifica se o operando de memória (16-byte) é igual ao operando imediato
+- (16-byte). Retorna 1 caso forem iguais, 0 caso contrário.
+-
+- 8-Byte Compare and Swap if Equal:
+- void _hmc64_cmpswapgt_s(uint64_t mem_op, uint64_t imm_op, uint64_t cmp_field)
+- Compara o cmp_field (8-byte) com o operando de memória (8-byte) e, se forem
+- iguais, escreve no endereço operando de memória o operando imediato (8-byte).
+-
+- 16-Byte Compare and Swap if Zero:
+- void _hmc64_cmpswapgt_s(__h128ll1 mem_op, __h128ll1 imm_op)
+- Compara o operando de memória (16-byte) com zero e, se forem iguais, escreve
+- no endereço do operando de memória o operando imediato (8-byte).
