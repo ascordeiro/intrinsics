@@ -392,7 +392,10 @@ VOID hmc_trace_instruction(RTN hmc_rtn, data_instr *hmc_data){
            (rtn_name.compare(4, 13, "_hmc64_incr_s") == 0) ||
            (rtn_name.compare(4, 15, "_hmc64_bwrite_s") == 0) ||
            (rtn_name.compare(4, 16, "_hmc64_equalto_s") == 0) ||
-           (rtn_name.compare(4, 17, "_hmc128_equalto_s") == 0))
+           (rtn_name.compare(4, 17, "_hmc128_equalto_s") == 0) ||
+           (rtn_name.compare(4, 16, "_hmc64_cmpgteq_s") == 0) ||
+           (rtn_name.compare(4, 16, "_hmc64_cmplteq_s") == 0) ||
+           (rtn_name.compare(4, 14, "_hmc64_cmplt_s") == 0))
             NewInstruction.opcode_operation = INSTRUCTION_OPERATION_HMC_ROA;
         else
             NewInstruction.opcode_operation = INSTRUCTION_OPERATION_HMC_ROWA;
@@ -976,6 +979,9 @@ VOID trace_instruction(TRACE trace, VOID *v) {
     std::string cmp_name14 ("_hmc64_cmpswapeq_s");
     std::string cmp_name15 ("_hmc128_cmpswapgt_s");
     std::string cmp_name16 ("_hmc128_cmpswaplt_s");
+    std::string cmp_name17 ("_hmc64_cmpgteq_s");
+    std::string cmp_name18 ("_hmc64_cmplteq_s");
+    std::string cmp_name19 ("_hmc64_cmplt_s");
 
     RTN rtn = TRACE_Rtn(trace);
     if(RTN_Valid(rtn)) {
@@ -993,24 +999,27 @@ VOID trace_instruction(TRACE trace, VOID *v) {
     for (BBL bbl = TRACE_BblHead(trace); BBL_Valid(bbl); bbl = BBL_Next(bbl)) {
 
         // HMC Traces
-        // if ((rtn_name.size() > 4) && ((rtn_name.compare(4, cmp_name0.size(), cmp_name0.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name1.size(), cmp_name1.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name2.size(), cmp_name2.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name3.size(), cmp_name3.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name4.size(), cmp_name4.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name5.size(), cmp_name5.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name6.size(), cmp_name6.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name7.size(), cmp_name7.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name8.size(), cmp_name8.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name9.size(), cmp_name9.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name10.size(), cmp_name10.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name11.size(), cmp_name11.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name12.size(), cmp_name12.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name13.size(), cmp_name13.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name14.size(), cmp_name14.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name15.size(), cmp_name15.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name16.size(), cmp_name16.c_str()) == 0)))
-        //         continue;
+        if ((rtn_name.size() > 4) && ((rtn_name.compare(4, cmp_name0.size(), cmp_name0.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name1.size(), cmp_name1.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name2.size(), cmp_name2.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name3.size(), cmp_name3.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name4.size(), cmp_name4.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name5.size(), cmp_name5.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name6.size(), cmp_name6.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name7.size(), cmp_name7.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name8.size(), cmp_name8.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name9.size(), cmp_name9.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name10.size(), cmp_name10.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name11.size(), cmp_name11.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name12.size(), cmp_name12.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name13.size(), cmp_name13.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name14.size(), cmp_name14.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name15.size(), cmp_name15.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name16.size(), cmp_name16.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name17.size(), cmp_name17.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name18.size(), cmp_name18.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name19.size(), cmp_name19.c_str()) == 0)))
+                continue;
         //----------------------------------------------------------------------
         // Write the static trace (assembly instructions)
         //----------------------------------------------------------------------
@@ -1047,24 +1056,27 @@ VOID trace_instruction(TRACE trace, VOID *v) {
         }
 
         // HMC Traces
-        // if ((rtn_name.size() > 4) && ((rtn_name.compare(4, cmp_name0.size(), cmp_name0.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name1.size(), cmp_name1.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name2.size(), cmp_name2.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name3.size(), cmp_name3.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name4.size(), cmp_name4.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name5.size(), cmp_name5.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name6.size(), cmp_name6.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name7.size(), cmp_name7.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name8.size(), cmp_name8.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name9.size(), cmp_name9.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name10.size(), cmp_name10.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name11.size(), cmp_name11.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name12.size(), cmp_name12.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name13.size(), cmp_name13.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name14.size(), cmp_name14.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name15.size(), cmp_name15.c_str()) == 0) ||
-        //     (rtn_name.compare(4, cmp_name16.size(), cmp_name16.c_str()) == 0)))
-        //         continue;
+        if ((rtn_name.size() > 4) && ((rtn_name.compare(4, cmp_name0.size(), cmp_name0.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name1.size(), cmp_name1.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name2.size(), cmp_name2.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name3.size(), cmp_name3.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name4.size(), cmp_name4.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name5.size(), cmp_name5.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name6.size(), cmp_name6.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name7.size(), cmp_name7.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name8.size(), cmp_name8.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name9.size(), cmp_name9.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name10.size(), cmp_name10.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name11.size(), cmp_name11.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name12.size(), cmp_name12.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name13.size(), cmp_name13.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name14.size(), cmp_name14.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name15.size(), cmp_name15.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name16.size(), cmp_name16.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name17.size(), cmp_name17.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name18.size(), cmp_name18.c_str()) == 0) ||
+            (rtn_name.compare(4, cmp_name19.size(), cmp_name19.c_str()) == 0)))
+                continue;
 
         INS_InsertCall(BBL_InsTail(bbl), IPOINT_BEFORE, AFUNPTR(write_dynamic_char), IARG_PTR, bbl_str, IARG_THREAD_ID, IARG_END);
     }
@@ -1197,7 +1209,7 @@ VOID ImageLoad(IMG img, VOID *) {
     printf("Loading %s, Image id = %d\n", IMG_Name(img).c_str(), IMG_Id(img));
 
     // HMC data initialization - HMC Traces
-    data_instr hmc_data[17];
+    data_instr hmc_data[20];
     hmc_set_data_instr(&hmc_data[0], "_hmc128_saddimm_s", "HMC_ADD_SINGLE_128OPER", 16);
     hmc_set_data_instr(&hmc_data[1], "_hmc64_incr_s", "HMC_INCR_SINGLE_64OPER", 8);
     hmc_set_data_instr(&hmc_data[2], "_hmc64_bwrite_s", "HMC_BITWRITE_SINGLE_64OPER", 8);
@@ -1215,6 +1227,9 @@ VOID ImageLoad(IMG img, VOID *) {
     hmc_set_data_instr(&hmc_data[14], "_hmc64_cmpswapeq_s", "HMC_CMPSWAPEQ_SINGLE_64OPER", 8);
     hmc_set_data_instr(&hmc_data[15], "_hmc64_equalto_s", "HMC_EQUALTO_SINGLE_64OPER", 8);
     hmc_set_data_instr(&hmc_data[16], "_hmc128_equalto_s", "HMC_EQUALTO_SINGLE_128OPER", 16);
+    hmc_set_data_instr(&hmc_data[17], "_hmc64_cmpgteq_s", "HMC_CMPGTEQ_SINGLE_64OPER", 8);
+    hmc_set_data_instr(&hmc_data[18], "_hmc64_cmplteq_s", "HMC_CMPLTEQ_SINGLE_64OPER", 8);
+    hmc_set_data_instr(&hmc_data[19], "_hmc64_cmplt_s", "HMC_CMPLT_SINGLE_64OPER", 8);
 
     TRACE_GENERATOR_DEBUG_PRINTF("ImageLoad()\n");
     /// Only the thread master runs these calls
@@ -1282,13 +1297,13 @@ VOID ImageLoad(IMG img, VOID *) {
                 rtn_name = RTN_Name(rtn);
 
                 // HMC Traces
-                // for (int n = 0; n < 17; n++){
-                //     std::string cmp_name (hmc_data[n].rtn_name);
-                //     if ((4 < rtn_name.size()) && (4 < cmp_name.size()) && rtn_name.compare(4, cmp_name.size(), cmp_name.c_str()) == 0){
-                //         // std::cout << rtn_name << "\n";
-                //         hmc_trace_instruction(rtn, &hmc_data[n]);
-                //     }
-                // }
+                for (int n = 0; n < 20; n++){
+                    std::string cmp_name (hmc_data[n].rtn_name);
+                    if ((4 < rtn_name.size()) && (4 < cmp_name.size()) && rtn_name.compare(4, cmp_name.size(), cmp_name.c_str()) == 0){
+                        // std::cout << rtn_name << "\n";
+                        hmc_trace_instruction(rtn, &hmc_data[n]);
+                    }
+                }
                 // ~ if (
                 // ~ //==========================================================
                 // ~ // Dynamic Linked Programs...
