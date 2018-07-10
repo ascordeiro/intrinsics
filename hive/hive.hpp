@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <vector>
+#include <time.h>
 #include <stdint.h>
 
 #define HI64I 64    // 256B array length to integer type
@@ -24,70 +24,118 @@ typedef uint64_t __hi64u; // long unsigned integer operand
 /* HIVE Arithmetic instructions */
 /********************************/
 
-// 01) 32-bit Add
-inline __hi32s *_hi64_add(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 01) 32-bit Add (64 integers)
+inline void *_hi64_add(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] + b[i];
+        printf("%d = %d + %d\n", c[i], a[i], b[i]);
     }
-    return c;
 }
 
-// 02) 32-bit Add Unsigned
-inline __hi32u *_hi64_addu(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 02) 32-bit Add (2048 integers)
+inline void *_hi2k_add(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] + b[i];
+        printf("%d = %d + %d\n", c[i], a[i], b[i]);
+    }
+}
+
+// 03) 32-bit Add Unsigned (64 integers)
+inline void *_hi64_addu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] + b[i];
+        printf("%d = %d + %d\n", c[i], a[i], b[i]);
     }
-    return c;
 }
 
-// 03) 32-bit Subtract
-inline __hi32s *_hi64_sub(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 04) 32-bit Add Unsigned (2048 integers)
+inline void *_hi2k_addu(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] + b[i];
+        printf("%d = %d + %d\n", c[i], a[i], b[i]);
+    }
+}
+
+// 05) 32-bit Subtract (64 integers)
+inline void *_hi64_sub(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] - b[i];
+        printf("%d = %d - %d\n", c[i], a[i], b[i]);
     }
-    return c;
 }
 
-// 04) 32-bit Subtract Unsigned
-inline __hi32u *_hi64_subu(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 06) 32-bit Subtract (2048 integers)
+inline void *_hi2k_sub(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] - b[i];
+        printf("%d = %d - %d\n", c[i], a[i], b[i]);
+    }
+}
+
+// 07) 32-bit Subtract Unsigned (64 integers)
+inline void *_hi64_subu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] - b[i];
+        printf("%d = %d - %d\n", c[i], a[i], b[i]);
     }
-    return c;
 }
 
-// 05) 32-bit Abs
-inline __hi32s *_hi64_abs(__hi32s *a) {
-    int const mask;
+// 08) 32-bit Subtract Unsigned (2048 integers)
+inline void *_hi2k_subu(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] - b[i];
+        printf("%d = %d - %d\n", c[i], a[i], b[i]);
+    }
+}
+
+// 09) 32-bit Abs (64 integers)
+inline void *_hi64_abs(__hi32s *a, __hi32s *b) {
+    int mask;
     int shift = (sizeof(int) * 8 - 1);
-    __hi32s *b = malloc(sizeof(__hi32s) * HI64I);
     for (int i = 0; i < HI64I; i++) {
         mask = a[i] >> shift;
         b[i] = ((a[i] + mask) ^ mask);
+        printf("%d = %d\n", a[i], b[i]);
     }
-    return b;
 }
 
-// 06) 32-bit Max
-inline __hi32s *_hi64_max(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 10) 32-bit Abs (2048 integers)
+inline void *_hi2k_abs(__hi32s *a, __hi32s *b) {
+    int mask;
+    int shift = (sizeof(int) * 8 - 1);
+    for (int i = 0; i < HI2kI; i++) {
+        mask = a[i] >> shift;
+        b[i] = ((a[i] + mask) ^ mask);
+        printf("%d = %d\n", a[i], b[i]);
+    }
+}
+
+// 11) 32-bit Max (64 integers)
+inline void *_hi64_max(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         if (a[i] > b[i]) {
             c[i] = a[i];
         } else {
             c[i] = b[i];
         }
+        printf("%d = %d - %d\n", c[i], a[i], b[i]);
     }
-    return c;
 }
 
-// 07) 32-bit Min
-inline __hi32s *_hi64_min(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 12) 32-bit Max (2048 integers)
+inline void *_hi2k_max(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (a[i] > b[i]) {
+            c[i] = a[i];
+        } else {
+            c[i] = b[i];
+        }
+        printf("%d = %d - %d\n", c[i], a[i], b[i]);
+    }
+}
+
+// 13) 32-bit Min (64 integers)
+inline void *_hi64_min(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         if (a[i] < b[i]) {
             c[i] = a[i];
@@ -95,78 +143,122 @@ inline __hi32s *_hi64_min(__hi32s *a, __hi32s *b) {
             c[i] = b[i];
         }
     }
-    return c;
+}
+
+// 14) 32-bit Min (2048 integers)
+inline void *_hi2k_min(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (a[i] < b[i]) {
+            c[i] = a[i];
+        } else {
+            c[i] = b[i];
+        }
+    }
 }
 
 /***************************/
 /* HIVE Logic instructions */
 /***************************/
 
-// 08) 32-bit And
-inline __hi32u *_hi64_and(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 15) 32-bit And (64 integers)
+inline void *_hi64_and(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] & b[i];
     }
-    return c;
 }
 
-// 09) 32-bit Or
-inline __hi32u *_hi64_or(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+
+// 16) 32-bit And (2048 integers)
+inline void *_hi2k_and(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] & b[i];
+    }
+}
+
+// 17) 32-bit Or (64 integers)
+inline void *_hi64_or(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] | b[i];
     }
-    return c;
 }
 
-// 10) 32-bit Xor
-inline __hi32u *_hi64_xor(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 18) 32-bit Or (2048 integers)
+inline void *_hi2k_or(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] | b[i];
+    }
+}
+
+// 19) 32-bit Xor (64 integers)
+inline void *_hi64_xor(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = ~(a[i] & b[i]) & ~(~a[i] & ~b[i]);
     }
-    return c;
 }
 
-// 11) 32-bit Not
-inline __hi32s *_hi64_not(__hi32s *a) {
-    __hi32s *b = malloc(sizeof(__hi32s) * HI64I);
+// 20) 32-bit Xor (2048 integers)
+inline void *_hi2k_xor(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = ~(a[i] & b[i]) & ~(~a[i] & ~b[i]);
+    }
+}
+
+// 21) 32-bit Not (64 integers)
+inline void *_hi64_not(__hi32s *a, __hi32s *b) {
     for (int i = 0; i < HI64I; i++) {
         b[i] = ~a[i];
     }
-    return b;
 }
 
-// 12) 32-bit Mask
-inline __hi32s *_hi64_mask(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 22) 32-bit Not (2048 integers)
+inline void *_hi2k_not(__hi32s *a, __hi32s *b) {
+    for (int i = 0; i < HI2kI; i++) {
+        b[i] = ~a[i];
+    }
+}
+
+// 23) 32-bit Mask (64 integers)
+inline void *_hi64_mask(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         if (b[i] == 0) {
             c[i] = a[i];
         }
     }
-    return c;
 }
 
-// 13) 32-bit Masku
-inline __hi32u *_hi64_masku(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 24) 32-bit Mask (2048 integers)
+inline void *_hi2k_mask(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (b[i] == 0) {
+            c[i] = a[i];
+        }
+    }
+}
+
+// 25) 32-bit Masku (64 integers)
+inline void *_hi64_masku(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         if (b[i] == 0) {
             c[i] = a[i];
         }
     }
-    return c;
+}
+
+// 26) 32-bit Masku (2048 integers)
+inline void *_hi2k_masku(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (b[i] == 0) {
+            c[i] = a[i];
+        }
+    }
 }
 
 /********************************/
 /* HIVE Comparison instructions */
 /********************************/
 
-// 14) 32-bit Set Less Than
-inline __hi32s *_hi64_slt(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 27) 32-bit Set Less Than (64 integers)
+inline void *_hi64_slt(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         if (a[i] < b[i]) {
             c[i] = 1;
@@ -174,12 +266,21 @@ inline __hi32s *_hi64_slt(__hi32s *a, __hi32s *b) {
             c[i] = 0;
         }
     }
-    return c;
 }
 
-// 15) 32-bit Set Less Than Unsigned
-inline __hi32u *_hi64_sltu(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 28) 32-bit Set Less Than (2048 integers)
+inline void *_hi2k_slt(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (a[i] < b[i]) {
+            c[i] = 1;
+        } else {
+            c[i] = 0;
+        }
+    }
+}
+
+// 29) 32-bit Set Less Than Unsigned (64 integers)
+inline void *_hi64_sltu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         if (a[i] < b[i]) {
             c[i] = 1;
@@ -187,12 +288,21 @@ inline __hi32u *_hi64_sltu(__hi32u *a, __hi32u *b) {
             c[i] = 0;
         }
     }
-    return c;
 }
 
-// 16) 32-bit Compare if equal
-inline __hi32s *_hi64_ceq(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 30) 32-bit Set Less Than Unsigned (2048 integers)
+inline void *_hi2k_sltu(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (a[i] < b[i]) {
+            c[i] = 1;
+        } else {
+            c[i] = 0;
+        }
+    }
+}
+
+// 31) 32-bit Compare if equal (64 integers)
+inline void *_hi64_ceq(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         if (a[i] == b[i]) {
             c[i] = 1;
@@ -200,12 +310,21 @@ inline __hi32s *_hi64_ceq(__hi32s *a, __hi32s *b) {
             c[i] = 0;
         }
     }
-    return c;
 }
 
-// 17) 32-bit Compare if equal Unsigned
-inline __hi32u *_hi64_cequ(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 32) 32-bit Compare if equal (2048 integers)
+inline void *_hi2k_ceq(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (a[i] == b[i]) {
+            c[i] = 1;
+        } else {
+            c[i] = 0;
+        }
+    }
+}
+
+// 33) 32-bit Compare if equal Unsigned (64 integers)
+inline void *_hi64_cequ(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         if (a[i] == b[i]) {
             c[i] = 1;
@@ -213,112 +332,177 @@ inline __hi32u *_hi64_cequ(__hi32u *a, __hi32u *b) {
             c[i] = 0;
         }
     }
-    return c;
+}
+
+// 34) 32-bit Compare if equal Unsigned (2048 integers)
+inline void *_hi2k_cequ(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        if (a[i] == b[i]) {
+            c[i] = 1;
+        } else {
+            c[i] = 0;
+        }
+    }
 }
 
 /***************************/
 /* HIVE Shift instructions */
 /***************************/
 
-// 18) 32-bit Shift Left Logical
-inline __hi32u *_hi64_sll(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 35) 32-bit Shift Left Logical (64 integers)
+inline void *_hi64_sll(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] << b[i];
     }
-    return c;
 }
 
-// 19) 32-bit Shift Right Logical
-inline __hi32u *_hi64_srl(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 36) 32-bit Shift Left Logical (2048 integers)
+inline void *_hi2k_sll(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] << b[i];
+    }
+}
+
+// 37) 32-bit Shift Right Logical (64 integers)
+inline void *_hi64_srl(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] >> b[i];
     }
-    return c;
 }
 
-// 20) 32-bit Shift Right Arithmetic
-inline __hi32s *_hi64_sra(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 38) 32-bit Shift Right Logical (2048 integers)
+inline void *_hi2k_srl(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] >> b[i];
+    }
+}
+
+// 39) 32-bit Shift Right Arithmetic (64 integers)
+inline void *_hi64_sra(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] >> b[i];
     }
-    return c;
+}
+
+// 40) 32-bit Shift Right Arithmetic (2048 integers)
+inline void *_hi2k_sra(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] >> b[i];
+    }
 }
 
 /*********************************************/
 /* HIVE Multiplication/Division instructions */
 /*********************************************/
 
-// 21) Divide Only
-inline __hi32s *_hi64_div(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 41) Divide Only
+inline void *_hi64_div(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] / b[i];
     }
-    return c;
 }
 
-// 22) Divide Only Unsigned
-inline __hi32u *_hi64_divu(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 42) Divide Only
+inline void *_hi2k_div(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] / b[i];
+    }
+}
+
+// 43) Divide Only Unsigned
+inline void *_hi64_divu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] / b[i];
     }
-    return c;
 }
 
-// 23) Module Only
-inline __hi32s *_hi64_mod(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 44) Divide Only Unsigned
+inline void *_hi2k_divu(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] / b[i];
+    }
+}
+
+// 45) Module Only
+inline void *_hi64_mod(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] % b[i];
     }
-    return c;
 }
 
-// 24) Module Only Unsigned
-inline __hi32u *_hi64_modu(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 46) Module Only
+inline void *_hi2k_mod(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] % b[i];
+    }
+}
+
+// 47) Module Only Unsigned
+inline void *_hi64_modu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] % b[i];
     }
-    return c;
 }
 
-// 25) Multiply 32-bits
-inline __hi32s *_hi64_mod(__hi32s *a, __hi32s *b) {
-    __hi32s *c = malloc(sizeof(__hi32s) * HI64I);
+// 48) Module Only Unsigned
+inline void *_hi2k_modu(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] % b[i];
+    }
+}
+
+// 49) Multiply 32-bits
+inline void *_hi64_mult(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] * b[i];
     }
-    return c;
 }
 
-// 26) Multiply 32-bits Unsigned
-inline __hi32u *_hi64_modu(__hi32u *a, __hi32u *b) {
-    __hi32u *c = malloc(sizeof(__hi32u) * HI64I);
+// 50) Multiply 32-bits
+inline void *_hi2k_mult(__hi32s *a, __hi32s *b, __hi32s *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] * b[i];
+    }
+}
+
+// 51) Multiply 32-bits Unsigned
+inline void *_hi64_multu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {
         c[i] = a[i] * b[i];
     }
-    return c;
 }
 
-// 27) Multiply 64-bits
-inline __hi64s *_hi32_mod(__hi64s *a, __hi64s *b) {
-    __hi64s *c = malloc(sizeof(__hi64s) * HI32L);
+// 52) Multiply 32-bits Unsigned
+inline void *_hi2k_multu(__hi32u *a, __hi32u *b, __hi32u *c) {
+    for (int i = 0; i < HI2kI; i++) {
+        c[i] = a[i] * b[i];
+    }
+}
+
+// 53) Multiply 64-bits
+inline void *_hi32_mult(__hi64s *a, __hi64s *b, __hi64s *c) {
     for (int i = 0; i < HI32L; i++) {
         c[i] = a[i] * b[i];
     }
-    return c;
 }
 
-// 28) Multiply 64-bits Unsigned
-inline __hi64u *_hi32_modu(__hi64u *a, __hi64u *b) {
-    __hi64u *c = malloc(sizeof(__hi64u) * HI32L);
+// 54) Multiply 64-bits
+inline void *_hi1k_mult(__hi64s *a, __hi64s *b, __hi64s *c) {
+    for (int i = 0; i < HI1kL; i++) {
+        c[i] = a[i] * b[i];
+    }
+}
+
+// 55) Multiply 64-bits Unsigned
+inline void *_hi32_multu(__hi64u *a, __hi64u *b, __hi64u *c) {
     for (int i = 0; i < HI32L; i++) {
         c[i] = a[i] * b[i];
     }
-    return c;
+}
+
+// 56) Multiply 64-bits Unsigned
+inline void *_hi1k_multu(__hi64u *a, __hi64u *b, __hi64u *c) {
+    for (int i = 0; i < HI1kL; i++) {
+        c[i] = a[i] * b[i];
+    }
 }
