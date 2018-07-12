@@ -243,82 +243,106 @@ inline void *_hive2K_sra(__hi32s *a, __hi32s *b, __hi32s *c) {
 /* HIVE Multiplication/Division instructions */
 /*********************************************/
 
-// 41) Divide Only
+// 41) 32-bit Divide Only (64 integers)
 inline void *_hive64_divs(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {c[i] = a[i] / b[i];}
 }
 
-// 42) Divide Only
+// 42) 32-bit Divide Only (2048 integers)
 inline void *_hive2K_divs(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI2KI; i++) {c[i] = a[i] / b[i];}
 }
 
-// 43) Divide Only Unsigned
+// 43) 32-bit Divide Only Unsigned (64 integers)
 inline void *_hive64_divu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {c[i] = a[i] / b[i];}
 }
 
-// 44) Divide Only Unsigned
+// 44) 32-bit Divide Only Unsigned (2048 integers)
 inline void *_hive2K_divu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI2KI; i++) {c[i] = a[i] / b[i];}
 }
 
-// 45) Module Only
+// 45) 32-bit Module Only (64 integers)
 inline void *_hive64_mods(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {c[i] = a[i] % b[i];}
 }
 
-// 46) Module Only
+// 46) 32-bit Module Only (2048 integers)
 inline void *_hive2K_mods(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI2KI; i++) {c[i] = a[i] % b[i];}
 }
 
-// 47) Module Only Unsigned
+// 47) 32-bit Module Only Unsigned (64 integers)
 inline void *_hive64_modu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {c[i] = a[i] % b[i];}
 }
 
-// 48) Module Only Unsigned
+// 48) 32-bit Module Only Unsigned (2048 integers)
 inline void *_hive2K_modu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI2KI; i++) {c[i] = a[i] % b[i];}
 }
 
-// 49) Multiply 32-bits
+// 49) 32-bit Multiply (64 integers)
 inline void *_hive64_mults(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI64I; i++) {c[i] = a[i] * b[i];}
 }
 
-// 50) Multiply 32-bits
+// 50) 32-bit Multiply (2048 integers)
 inline void *_hive2K_mults(__hi32s *a, __hi32s *b, __hi32s *c) {
     for (int i = 0; i < HI2KI; i++) {c[i] = a[i] * b[i];}
 }
 
-// 51) Multiply 32-bits Unsigned
+// 51) 32-bit Multiply Unsigned (64 integers)
 inline void *_hive64_multu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI64I; i++) {c[i] = a[i] * b[i];}
 }
 
-// 52) Multiply 32-bits Unsigned
+// 52) 32-bit Multiply Unsigned (2048 integers)
 inline void *_hive2K_multu(__hi32u *a, __hi32u *b, __hi32u *c) {
     for (int i = 0; i < HI2KI; i++) {c[i] = a[i] * b[i];}
 }
 
-// 53) Multiply 64-bits
+// 53) 64-bit Multiply (32 integers)
 inline void *_hive32_mults(__hi64s *a, __hi64s *b, __hi64s *c) {
     for (int i = 0; i < HI32L; i++) {c[i] = a[i] * b[i];}
 }
 
-// 54) Multiply 64-bits
+// 54) 64-bit Multiply (1024 integers)
 inline void *_hive1K_mults(__hi64s *a, __hi64s *b, __hi64s *c) {
     for (int i = 0; i < HI1KL; i++) {c[i] = a[i] * b[i];}
 }
 
-// 55) Multiply 64-bits Unsigned
+// 55) 64-bit Multiply Unsigned (32 integers)
 inline void *_hive32_multu(__hi64u *a, __hi64u *b, __hi64u *c) {
     for (int i = 0; i < HI32L; i++) {c[i] = a[i] * b[i];}
 }
 
-// 56) Multiply 64-bits Unsigned
+// 56) 64-bit Multiply Unsigned (1024 integers)
 inline void *_hive1K_multu(__hi64u *a, __hi64u *b, __hi64u *c) {
     for (int i = 0; i < HI1KL; i++) {c[i] = a[i] * b[i];}
+}
+
+/*******************************/
+/* HIVE Immediate instructions */
+/*******************************/
+
+// 57) 32-bit Move Immediate Data (64 integers)
+inline void *_hive64_movs(__hi32s *a, __hi32s b) {
+    for (int i = 0; i < HI64I; i++) {a[i] = b;}
+}
+
+// 58) 32-bit Move Immediate Data (2048 integers)
+inline void *_hive2K_movs(__hi32s *a, __hi32s b) {
+    for (int i = 0; i < HI2KI; i++) {a[i] = b;}
+}
+
+// 59) 32-bit Move Immediate Data Unsigned (64 integers)
+inline void *_hive64_movu(__hi32u *a, __hi32u b) {
+    for (int i = 0; i < HI64I; i++) {a[i] = b;}
+}
+
+// 60) 32-bit Move Immediate Data (2048 integers)
+inline void *_hive2K_movu(__hi32u *a, __hi32u b) {
+    for (int i = 0; i < HI2KI; i++) {a[i] = b;}
 }

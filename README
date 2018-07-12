@@ -34,16 +34,24 @@
 - __m64s1: 64-bit signed integer;
 - __m64u1: 64-bit unsigned integer;
 -
+- HIVE:
+- __hi32s: 32-bit signed integer;
+- __hi32u: 32-bit unsigned integer;
+- __hi64s: 64-bit signed integer;
+- __hi64u: 64-bit unsigned integer;
+-
 -   The data types were renamed inspired in Intel Intrinsics function pattern.
 - Which identifies the intrinsics data type is the first 2 underlines
-- characteres. The third character identify the choosen architechture. The next
-- 2 characteres indicates the variable size in bits. The next charactere
-- indicates if is a signed or unsigned number. The last one indicates the number
-- of variables are assigned to that type.
+- characteres. The third (and fouth for HIVE) character(s) identify the choosen
+- architechture. The next 2 characteres indicates the variable size in bits.
+- The next charactere indicates if is a signed or unsigned number. For HMC and
+- MIPS, the last one indicates the number of variables assigned to that type
+- (As HIVE is an vectorized instruction, the instruction lenght is assigned to
+- instruction name).
 -
 --------------------------------------------------------------------------------
 -
-- HMC FUNCTIONS -
+-------------------------------- HMC FUNCTIONS ---------------------------------
 -
 - The implementation is based on HMC 2.1 specification and does not follows
 - exactly the real behave described in the specification.
@@ -190,7 +198,7 @@
 -
 --------------------------------------------------------------------------------
 -
-- MIPS FUNCTIONS -
+-------------------------------- MIPS FUNCTIONS --------------------------------
 -
 - The implementation is based on MIPS ISA and does not follows exactly the real
 - behave of the architechture. All the instructions were implemented, except
@@ -356,3 +364,353 @@
 - __m64u1 _mips_multu64(__m32u1 rs, __m32u1 rt)
 - Multiplies the rs and rt registers and return the result to the call function.
 -
+--------------------------------------------------------------------------------
+-
+-------------------------------- HIVE FUNCTIONS --------------------------------
+-
+- The implementation is based on MIPS and ARM NEON specification and does not
+- follows exactly the real behave described in these specifications. As HIVE
+- implements vectorized instructions, the vector size is specified below.
+-
+- HI64I: 256-bytes array size to integer types;
+- HI2KI: 8-Kbytes arrey size to integer types;
+- HI32L: 256-bytes array size to long integer types;
+- HI1KL: 8-Kbytes array size to long integer types;
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- ARITHMETIC:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 32-bit Add (64 integers):
+- _hive64_adds(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed addition between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Add (2048 integers):
+- _hive2K_adds(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed addition between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Add Unsigned (64 integers):
+- _hive64_addu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned addition between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Add Unsigned (2048 integers):
+- _hive2K_addu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned addition between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Subtract (64 integers):
+- _hive64_subs(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed subtraction between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Subtract (2048 integers):
+- _hive2K_subs(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed subtraction between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Subtract Unsigned (64 integers):
+- _hive64_subu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned subtraction between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Subtract Unsigned (2048 integers):
+- _hive2K_subu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned subtraction between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Abs (64 integers):
+- _hive64_abs(__hi32s *a, __hi32s *b)
+- Takes the absolute value of each element in a source vector A and stores it
+- into the destination vector B.
+-
+- 32-bit Abs (2048 integers):
+- _hive2K_abs(__hi32s *a, __hi32s *b)
+- Takes the absolute value of each element in a source vector A and stores it
+- into the destination vector B.
+-
+- 32-bit Max (64 integers):
+- _hive64_max(__hi32s *a, __hi32s *b, __hi32s *c)
+- Find the maximal value between each element of source vectors A and B and
+- stores it into the destination vector C.
+-
+- 32-bit Max (2048 integers):
+- _hive2K_max(__hi32s *a, __hi32s *b, __hi32s *c)
+- Find the maximal value between each element of source vectors A and B and
+- stores it into the destination vector C.
+-
+- 32-bit Min (64 integers):
+- _hive64_min(__hi32s *a, __hi32s *b, __hi32s *c)
+- Find the minimal value between each element of source vectors A and B and
+- stores it into the destination vector C.
+-
+- 32-bit Min (2048 integers):
+- _hive2K_min(__hi32s *a, __hi32s *b, __hi32s *c)
+- Find the minimal value between each element of source vectors A and B and
+- stores it into the destination vector C.
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- LOGIC:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 32-bit And (64 integers):
+- _hive64_and(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs AND operation between elements of source vectors A and B and stores
+- the result into the destination vector C.
+-
+- 32-bit And (2048 integers):
+- _hive2K_and(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs AND operation between elements of source vectors A and B and stores
+- the result into the destination vector C.
+-
+- 32-bit Or (64 integers):
+- _hive64_or(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs OR operation between elements of source vectors A and B and stores
+- the result into the destination vector C.
+-
+- 32-bit Or (2048 integers):
+- _hive2K_or(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs OR operation between elements of source vectors A and B and stores
+- the result into the destination vector C.
+-
+- 32-bit Xor (64 integers):
+- _hive64_xor(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs XOR operation between elements of source vectors A and B and stores
+- the result into the destination vector C.
+-
+- 32-bit Xor (2048 integers):
+- _hive2K_xor(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs XOR operation between elements of source vectors A and B and stores
+- the result into the destination vector C.
+-
+- 32-bit Not (64 integers):
+- _hive64_not(__hi32s *a, __hi32s *b)
+- Performs NOT operation in elements of source vector A and stores the result
+- into the destination vector B.
+-
+- 32-bit Not (2048 integers):
+- _hive2K_not(__hi32s *a, __hi32s *b)
+- Performs NOT operation in elements of source vector A and stores the result
+- into the destination vector B.
+-
+- 32-bit Mask (64 integers):
+- _hive64_masks(__hi32s *a, __hi32s *b, __hi32s *c)
+- Inserts each signed element of source vector A into the destination vector C
+- if the corresponding element of the source vector B is 0, otherwise it leaves
+- the destination vector unchanged.
+-
+- 32-bit Mask (2048 integers):
+- _hive2K_masks(__hi32s *a, __hi32s *b, __hi32s *c)
+- Inserts each signed element of source vector A into the destination vector C
+- if the corresponding element of the source vector B is 0, otherwise it leaves
+- the destination vector unchanged.
+-
+- 32-bit Masku (64 integers):
+- _hive64_masku(__hi32u *a, __hi32u *b, __hi32u *c)
+- Inserts each unsigned element of source vector A into the destination vector
+- C if the corresponding element of the source vector B is 0, otherwise it
+- leaves the destination vector unchanged.
+-
+- 32-bit Masku (2048 integers):
+- _hive2K_masku(__hi32u *a, __hi32u *b, __hi32u *c)
+- Inserts each unsigned element of source vector A into the destination vector
+- C if the corresponding element of the source vector B is 0, otherwise it
+- leaves the destination vector unchanged.
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- COMPARISON:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 32-bit Set Less Than (64 integers):
+- _hive64_slts(__hi32s *a, __hi32s *b, __hi32s *c)
+- Compares each signed element of source vectors A and B and if the element of
+- A is minor than the element of B, destination source C stores 1 in the same
+- position. Otherwise, stores 0.
+-
+- 32-bit Set Less Than (2048 integers):
+- _hive2K_slts(__hi32s *a, __hi32s *b, __hi32s *c)
+- Compares each signed element of source vectors A and B and if the element of
+- A is minor than the element of B, destination source C stores 1 in the same
+- position. Otherwise, stores 0.
+-
+- 32-bit Set Less Than Unsigned (64 integers):
+- _hive64_sltu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Compares each unsigned element of source vectors A and B and if the element
+- of A is minor than the element of B, destination source C stores 1 in the
+- same position. Otherwise, stores 0.
+-
+- 32-bit Set Less Than Unsigned (2048 integers):
+- _hive2K_sltu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Compares each unsigned element of source vectors A and B and if the element
+- of A is minor than the element of B, destination source C stores 1 in the
+- same position. Otherwise, stores 0.
+-
+- 32-bit Compare if equal (64 integers):
+- _hive64_cmpeqs(__hi32s *a, __hi32s *b, __hi32s *c)
+- Compares each signed element of source vectors A and B and if the element of
+- A is equal to the element of B, destination source C stores 1 in the same
+- position. Otherwise, stores 0.
+-
+- 32-bit Compare if equal (2048 integers):
+- _hive2K_cmpeqs(__hi32s *a, __hi32s *b, __hi32s *c)
+- Compares each signed element of source vectors A and B and if the element of
+- A is equal to the element of B, destination source C stores 1 in the same
+- position. Otherwise, stores 0.
+-
+- 32-bit Compare if equal Unsigned (64 integers):
+- _hive64_cmpequ(__hi32u *a, __hi32u *b, __hi32u *c)
+- Compares each unsigned element of source vectors A and B and if the element
+- of A is equal to the element of B, destination source C stores 1 in the same
+- position. Otherwise, stores 0.
+-
+- 32-bit Compare if equal Unsigned (2048 integers):
+- _hive2K_cmpequ(__hi32u *a, __hi32u *b, __hi32u *c)
+- Compares each unsigned element of source vectors A and B and if the element
+- of A is equal to the element of B, destination source C stores 1 in the same
+- position. Otherwise, stores 0.
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- SHIFT:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 32-bit Shift Left Logical (64 integers):
+- _hive64_sll(__hi32u *a, __hi32u *b, __hi32u *c)
+- Left shifts each element in source vector A the amount specified in source
+- vector B and stores the result into the destination vector C. This operation
+- does not shift signal.
+-
+- 32-bit Shift Left Logical (2048 integers):
+- _hive2K_sll(__hi32u *a, __hi32u *b, __hi32u *c)
+- Left shifts each element in source vector A the amount specified in source
+- vector B and stores the result into the destination vector C. This operation
+- does not shift signal.
+-
+- 32-bit Shift Right Logical (64 integers):
+- _hive64_srl(__hi32u *a, __hi32u *b, __hi32u *c)
+- Right shifts each element in source vector A the amount specified in source
+- vector B and stores the result into the destination vector C. This operation
+- does not shift signal.
+-
+- 32-bit Shift Right Logical (2048 integers):
+- _hive2K_srl(__hi32u *a, __hi32u *b, __hi32u *c)
+- Right shifts each element in source vector A the amount specified in source
+- vector B and stores the result into the destination vector C. This operation
+- does not shift signal.
+-
+- 32-bit Shift Right Arithmetic (64 integers):
+- _hive64_sra(__hi32s *a, __hi32s *b, __hi32s *c)
+- Right shifts each element in source vector A the amount specified in source
+- vector B and stores the result into the destination vector C. This operation
+- shifts signal.
+-
+- 32-bit Shift Right Arithmetic (2048 integers):
+- _hive2K_sra(__hi32s *a, __hi32s *b, __hi32s *c)
+- Right shifts each element in source vector A the amount specified in source
+- vector B and stores the result into the destination vector C. This operation
+- shifts signal.
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- MULTIPLICATION/DIVISION:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 32-bit Divide Only (64 integers):
+- _hive64_divs(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed division between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Divide Only (2048 integers):
+- _hive2K_divs(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed division between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Divide Only Unsigned (64 integers):
+- _hive64_divu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned division between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Divide Only Unsigned (2048 integers):
+- _hive2K_divu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned division between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Module Only (64 integers):
+- _hive64_mods(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed module operation between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 32-bit Module Only (2048 integers):
+- _hive2K_mods(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed module operation between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 32-bit Module Only Unsigned (64 integers):
+- _hive64_modu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned module operation between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 32-bit Module Only Unsigned (2048 integers):
+- _hive2K_modu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned module operation between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 32-bit Multiply (64 integers):
+- _hive64_mults(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed multiplication between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Multiply (2048 integers):
+- _hive2K_mults(__hi32s *a, __hi32s *b, __hi32s *c)
+- Performs signed multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 32-bit Multiply Unsigned (64 integers):
+- _hive64_multu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 32-bit Multiply Unsigned (2048 integers):
+- _hive2K_multu(__hi32u *a, __hi32u *b, __hi32u *c)
+- Performs unsigned multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 64-bit Multiply (32 integers):
+- _hive32_mults(__hi64s *a, __hi64s *b, __hi64s *c)
+- Performs signed multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 64-bit Multiply (1024 integers):
+- _hive1K_mults(__hi64s *a, __hi64s *b, __hi64s *c)
+- Performs signed multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 64-bit Multiply Unsigned (32 integers):
+- _hive32_multu(__hi64u *a, __hi64u *b, __hi64u *c)
+- Performs unsigned multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 64-bit Multiply Unsigned (1024 integers):
+- _hive1K_multu(__hi64u *a, __hi64u *b, __hi64u *c)
+- Performs unsigned multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- IMMEDIATE:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 32-bit Move Immediate Data:
+- _hive64_movs(__hi32s *a, __hi32s *b)
+- Replicates a signed immediate b into the vector A.
+-
+- 32-bit Move Immediate Data (2048 integers):
+- _hive2K_movs(__hi32s *a, __hi32s *b)
+- Replicates a signed immediate b into the vector A.
+-
+- 32-bit Move Immediate Data Unsigned (64 integers):
+- _hive64_movu(__hi32u *a, __hi32u *b)
+- Replicates a unsigned immediate b into the vector A.
+-
+- 32-bit Move Immediate Data (2048 integers):
+- _hive2K_movu(__hi32u *a, __hi32u *b)
+- Replicates a unsigned immediate b into the vector A.
