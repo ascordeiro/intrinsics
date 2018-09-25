@@ -39,6 +39,7 @@
 - __ch32u: 32-bit unsigned integer;
 - __ch64s: 64-bit signed integer;
 - __ch64u: 64-bit unsigned integer;
+- __ch32f: 32-bit signed float;
 -
 -   The data types were renamed inspired in Intel Intrinsics function pattern.
 - Which identifies the intrinsics data type is the first 2 underlines
@@ -701,7 +702,7 @@
 - IMMEDIATE:
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
-- 32-bit Move Immediate Data:
+- 32-bit Move Immediate Data (64 integers):
 - _chive64_movs(__hi32s *a, __hi32s *b)
 - Replicates a signed immediate b into the vector A.
 -
@@ -716,3 +717,27 @@
 - 32-bit Move Immediate Data (2048 integers):
 - _chive2K_movu(__hi32u *a, __hi32u *b)
 - Replicates a unsigned immediate b into the vector A.
+-
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- kNN FLOAT INSTRUCTIONS:
+- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-
+- 32-bit Move Immediate Data (2048 floats):
+- _chive2K_fmovs(__ch32f *a, __ch32f b)
+- Replicates a signed immediate b into vector A.
+-
+- 32-bit Subtract (2048 floats):
+- _chive2K_fsubs(__ch32f *a, __ch32f *b, __ch32f *c)
+- Performs signed subtraction between elements of source vectors A and B and
+- stores the result into the destination vector C.
+-
+- 32-bit Multiply (2048 floats):
+- _chive2K_fmults(__ch32f *a, __ch32f *b, __ch32f *c)
+- Performs signed multiplication between elements of source vectors A and B
+- and stores the result into the destination vector C.
+-
+- 32-bit Cumulative Sum (2048 floats):
+-_chive2K_fcsum(__ch32f *a, __ch32f *b, __ch32f *c)
+- Performs cumulative sum between elements of source vectors A and B and stores
+- the result into the destination variable C.
+-

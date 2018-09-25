@@ -19,6 +19,7 @@ typedef int32_t  __ch32s; // signed integer operand
 typedef uint32_t __ch32u; // unsigned integer operand
 typedef int64_t  __ch64s; // long integer operand
 typedef uint64_t __ch64u; // long unsigned integer operand
+typedef float_t  __ch32f; // signed float operand
 
 /*********************************/
 /* CHIVE Arithmetic instructions */
@@ -345,4 +346,28 @@ inline void *_chive64_movu(__ch32u *a, __ch32u b) {
 // 60) 32-bit Move Immediate Data (2048 integers)
 inline void *_chive2K_movu(__ch32u *a, __ch32u b) {
     for (int i = 0; i < CH2KI; i++) {a[i] = b;}
+}
+
+/**************************/
+/* CHIVE kNN instructions */
+/**************************/
+
+// 61) 32-bit Move Immediate Data (2048 floats)
+inline void *_chive2K_fmovs(__ch32f *a, __ch32f b) {
+    for (int i = 0; i < CH2KI; i++) {a[i] = b;}
+}
+
+// 62) 32-bit Subtract (2048 floats)
+inline void *_chive2K_fsubs(__ch32f *a, __ch32f *b, __ch32f *c) {
+    for (int i = 0; i < CH2KI; i++) {c[i] = a[i] - b[i];}
+}
+
+// 63) 32-bit Multiply (2048 floats)
+inline void *_chive2K_fmults(__ch32f *a, __ch32f *b, __ch32f *c) {
+    for (int i = 0; i < CH2KI; i++) {c[i] = a[i] * b[i];}
+}
+
+// 64) 32-bit Cumulative Sum (2048 floats)
+inline void *_chive2K_fcsum(__ch32f *a, __ch32f *b, __ch32f *c) {
+    for (int i = 0; i < CH2KI; i++) {*c += a[i] + b[i];}
 }
