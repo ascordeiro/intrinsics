@@ -385,359 +385,369 @@
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
 - 32-bit Add (64 integers):
-- _chive64_adds(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed addition between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive64_iadds(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform signed addition between 32-bit elements source vectors A[0:63] 
+- and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Add (2048 integers):
-- _chive2K_adds(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed addition between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive2K_iadds(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform signed addition between 32-bit elements source vectors A[0:2047] 
+- and B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Add Unsigned (64 integers):
-- _chive64_addu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned addition between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive64_iaddu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform unsigned addition between 32-bit elements source vectors A[0:63] 
+- and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Add Unsigned (2048 integers):
-- _chive2K_addu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned addition between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive2K_iaddu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform unsigned addition between 32-bit elements source vectors A[0:2047] 
+- and B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Subtract (64 integers):
-- _chive64_subs(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed subtraction between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive64_isubs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform signed subtraction between 32-bit elements source vectors A[0:63] 
+- and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Subtract (2048 integers):
-- _chive2K_subs(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed subtraction between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive2K_isubs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform signed subtraction between 32-bit elements source vectors A[0:2047] 
+- and B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Subtract Unsigned (64 integers):
-- _chive64_subu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned subtraction between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive64_isubu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform unsigned subtraction between 32-bit elements source vectors A[0:63] 
+- and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Subtract Unsigned (2048 integers):
-- _chive2K_subu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned subtraction between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive2K_isubu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform unsigned subtraction between 32-bit elements source vectors A[0:2047] 
+- and B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Abs (64 integers):
-- _chive64_abs(__hi32s *a, __hi32s *b)
-- Takes the absolute value of each element in a source vector A and stores it
-- into the destination vector B.
+- _chive64_iabss(__ch32s *a, __ch32s *b)
+- Takes the absolute value of each 32-bit element in a source vector A[0:63] 
+- and stores it into the destination vector B[0:63].
 -
 - 32-bit Abs (2048 integers):
-- _chive2K_abs(__hi32s *a, __hi32s *b)
-- Takes the absolute value of each element in a source vector A and stores it
-- into the destination vector B.
+- _chive2K_iabss(__ch32s *a, __ch32s *b)
+- Takes the absolute value of each 32-bit element in a source vector A[0:2047] 
+- and stores it into the destination vector B[0:2047].
 -
 - 32-bit Max (64 integers):
-- _chive64_max(__hi32s *a, __hi32s *b, __hi32s *c)
-- Find the maximal value between each element of source vectors A and B and
-- stores it into the destination vector C.
+- _chive64_imaxs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Find the maximal value between each 32-bit element of source vectors A[0:63] 
+- and B[0:63] and stores it into the destination vector C[0:63].
 -
 - 32-bit Max (2048 integers):
-- _chive2K_max(__hi32s *a, __hi32s *b, __hi32s *c)
-- Find the maximal value between each element of source vectors A and B and
-- stores it into the destination vector C.
+- _chive2K_imaxs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Find the maximal value between each 32-bit element of source vectors A[0:2047] 
+- and B[0:2047] and stores it into the destination vector C[0:2047].
 -
 - 32-bit Min (64 integers):
-- _chive64_min(__hi32s *a, __hi32s *b, __hi32s *c)
-- Find the minimal value between each element of source vectors A and B and
-- stores it into the destination vector C.
+- _chive64_imins(__ch32s *a, __ch32s *b, __ch32s *c)
+- Find the minimal value between each 32-bit element of source vectors A[0:63] 
+- and B[0:63] and stores it into the destination vector C[0:63].
 -
 - 32-bit Min (2048 integers):
-- _chive2K_min(__hi32s *a, __hi32s *b, __hi32s *c)
-- Find the minimal value between each element of source vectors A and B and
-- stores it into the destination vector C.
+- _chive2K_imins(__ch32s *a, __ch32s *b, __ch32s *c)
+- Find the minimal value between each 32-bit element of source vectors A[0:2047] 
+- and B[0:2047] and stores it into the destination vector C[0:2047].
 -
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - LOGIC:
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
 - 32-bit And (64 integers):
-- _chive64_and(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs AND operation between elements of source vectors A and B and stores
-- the result into the destination vector C.
+- _chive64_iandu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform AND operation between 32-bit elements source vectors A[0:63] and 
+- B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit And (2048 integers):
-- _chive2K_and(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs AND operation between elements of source vectors A and B and stores
-- the result into the destination vector C.
+- _chive2K_iandu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform AND operation between 32-bit elements source vectors A[0:2047] and 
+- B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Or (64 integers):
-- _chive64_or(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs OR operation between elements of source vectors A and B and stores
-- the result into the destination vector C.
+- _chive64_iorun(__ch32u *a, __ch32u *b, __ch32u *c) 
+- Perform OR operation between 32-bit elements source vectors A[0:63] and 
+- B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Or (2048 integers):
-- _chive2K_or(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs OR operation between elements of source vectors A and B and stores
-- the result into the destination vector C.
+- _chive2K_iorun(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform OR operation between 32-bit elements of source vectors A[0:2047] and 
+- B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Xor (64 integers):
-- _chive64_xor(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs XOR operation between elements of source vectors A and B and stores
-- the result into the destination vector C.
+- _chive64_ixoru(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform XOR operation between 32-bit elements source vectors A[0:63] and 
+- B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Xor (2048 integers):
-- _chive2K_xor(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs XOR operation between elements of source vectors A and B and stores
-- the result into the destination vector C.
+- _chive2K_ixoru(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform XOR operation between 32-bit elements source vectors A[0:2047] and 
+- B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Not (64 integers):
-- _chive64_not(__hi32s *a, __hi32s *b)
-- Performs NOT operation in elements of source vector A and stores the result
-- into the destination vector B.
+- _chive64_inots(__ch32s *a, __ch32s *b)
+- Perform NOT operation in 32-bit elements source vector A[0:63] and stores 
+- the result into the destination vector B[0:63].
 -
 - 32-bit Not (2048 integers):
-- _chive2K_not(__hi32s *a, __hi32s *b)
-- Performs NOT operation in elements of source vector A and stores the result
-- into the destination vector B.
+- _chive2K_inots(__ch32s *a, __ch32s *b)
+- Perform NOT operation in 32-bit elements source vector A[0:2047] and stores 
+- the result into the destination vector B[0:2047].
 -
 - 32-bit Mask (64 integers):
-- _chive64_masks(__hi32s *a, __hi32s *b, __hi32s *c)
-- Inserts each signed element of source vector A into the destination vector C
-- if the corresponding element of the source vector B is 0, otherwise it leaves
-- the destination vector unchanged.
+- _chive64_imsks(__ch32s *a, __ch32s *b, __ch32s *c) 
+- Insert each signed 32-bit element source vector A[0:63] into the destination 
+- vector C[0:63] if the corresponding 32-bit element from source vector B[0:63] 
+- is 0, otherwise, it leaves the destination vector unchanged.
 -
 - 32-bit Mask (2048 integers):
-- _chive2K_masks(__hi32s *a, __hi32s *b, __hi32s *c)
-- Inserts each signed element of source vector A into the destination vector C
-- if the corresponding element of the source vector B is 0, otherwise it leaves
-- the destination vector unchanged.
+- _chive2K_imsks(__ch32s *a, __ch32s *b, __ch32s *c)
+- Insert each signed 32-bit element source vector A[0:2047] into the destination 
+- vector C[0:2047] if the corresponding 32-bit element from source vector 
+- B[0:2047] is 0, otherwise, it leaves the destination vector unchanged.
 -
 - 32-bit Masku (64 integers):
-- _chive64_masku(__hi32u *a, __hi32u *b, __hi32u *c)
-- Inserts each unsigned element of source vector A into the destination vector
-- C if the corresponding element of the source vector B is 0, otherwise it
-- leaves the destination vector unchanged.
+- _chive64_imsku(__ch32u *a, __ch32u *b, __ch32u *c)
+- Insert each unsigned 32-bit element source vector A[0:63] into the destination 
+- vector C[0:63] if the corresponding 32-bit element from source vector B[0:63] 
+- is 0, otherwise, it leaves the destination vector unchanged.
 -
 - 32-bit Masku (2048 integers):
-- _chive2K_masku(__hi32u *a, __hi32u *b, __hi32u *c)
-- Inserts each unsigned element of source vector A into the destination vector
-- C if the corresponding element of the source vector B is 0, otherwise it
-- leaves the destination vector unchanged.
+- Insert each unsigned 32-bit element source vector A[0:2047] into the 
+- destination vector C[0:2047] if the corresponding 32-bit element from source 
+- vector B[0:2047] is 0, otherwise, it leaves the destination vector unchanged.
 -
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - COMPARISON:
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
 - 32-bit Set Less Than (64 integers):
-- _chive64_slts(__hi32s *a, __hi32s *b, __hi32s *c)
-- Compares each signed element of source vectors A and B and if the element of
-- A is minor than the element of B, destination source C stores 1 in the same
-- position. Otherwise, stores 0.
+- _chive64_islts(__ch32s *a, __ch32s *b, __ch32s *c)
+- Compare each signed 32-bit elements from source vectors A[0:63] and B[0:63] 
+- and if the element of A[0:63] is minor, then destination source C[0:63] 
+- stores 1 in the same position, otherwise, stores 0.
 -
 - 32-bit Set Less Than (2048 integers):
-- _chive2K_slts(__hi32s *a, __hi32s *b, __hi32s *c)
-- Compares each signed element of source vectors A and B and if the element of
-- A is minor than the element of B, destination source C stores 1 in the same
-- position. Otherwise, stores 0.
+- _chive2K_islts(__ch32s *a, __ch32s *b, __ch32s *c)
+- Compare each signed 32-bit elements from source vectors A[0:2047] and 
+- B[0:2047] and if the element of A[0:2047] is minor, then destination source 
+- C[0:2047] stores 1 in the same position, otherwise, stores 0.
 -
 - 32-bit Set Less Than Unsigned (64 integers):
-- _chive64_sltu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Compares each unsigned element of source vectors A and B and if the element
-- of A is minor than the element of B, destination source C stores 1 in the
-- same position. Otherwise, stores 0.
+- _chive64_isltu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Compare each unsigned 32-bit elements from source vectors A[0:63] and B[0:63] 
+- and if the element of A[0:63] is minor, then destination source C[0:63] 
+- stores 1 in the same position, otherwise, stores 0.
 -
 - 32-bit Set Less Than Unsigned (2048 integers):
-- _chive2K_sltu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Compares each unsigned element of source vectors A and B and if the element
-- of A is minor than the element of B, destination source C stores 1 in the
-- same position. Otherwise, stores 0.
+- _chive2K_isltu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Compare each unsigned 32-bit elements from source vectors A[0:2047] and 
+- B[0:2047] and if the element of A[0:2047] is minor, then destination source 
+- C[0:2047] stores 1 in the same position, otherwise, stores 0.
 -
 - 32-bit Compare if equal (64 integers):
-- _chive64_cmpeqs(__hi32s *a, __hi32s *b, __hi32s *c)
-- Compares each signed element of source vectors A and B and if the element of
-- A is equal to the element of B, destination source C stores 1 in the same
-- position. Otherwise, stores 0.
+- _chive64_icmqs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Compare each signed 32-bit elements from source vectors A[0:63] and B[0:63] 
+- and if they are equal, then destination source C[0:63] stores 1 in the same 
+- position, otherwise, stores 0.
 -
 - 32-bit Compare if equal (2048 integers):
-- _chive2K_cmpeqs(__hi32s *a, __hi32s *b, __hi32s *c)
-- Compares each signed element of source vectors A and B and if the element of
-- A is equal to the element of B, destination source C stores 1 in the same
-- position. Otherwise, stores 0.
+- _chive2K_icmqs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Compare each signed 32-bit elements of source vectors A[0:2047] and B[0:2047] 
+- and if they are equal, then destination source C[0:2047] stores 1 in the same 
+- position, otherwise, stores 0.
 -
 - 32-bit Compare if equal Unsigned (64 integers):
-- _chive64_cmpequ(__hi32u *a, __hi32u *b, __hi32u *c)
-- Compares each unsigned element of source vectors A and B and if the element
-- of A is equal to the element of B, destination source C stores 1 in the same
-- position. Otherwise, stores 0.
+- _chive64_icmqu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Compare each unsigned 32-bit elements of source vectors A[0:63] and B[0:63] 
+- and if they are equal, then destination source C[0:63] stores 1 in the same 
+- position, otherwise, stores 0.
 -
 - 32-bit Compare if equal Unsigned (2048 integers):
-- _chive2K_cmpequ(__hi32u *a, __hi32u *b, __hi32u *c)
-- Compares each unsigned element of source vectors A and B and if the element
-- of A is equal to the element of B, destination source C stores 1 in the same
-- position. Otherwise, stores 0.
+- _chive2K_icmqu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Compares each unsigned 32-bit elements of source vectors A[0:2047] and 
+- B[0:2047] and if they are equal, then destination source C[0:2047] stores 1 
+- in the same position, otherwise, stores 0.
 -
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - SHIFT:
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
 - 32-bit Shift Left Logical (64 integers):
-- _chive64_sll(__hi32u *a, __hi32u *b, __hi32u *c)
-- Left shifts each element in source vector A the amount specified in source
-- vector B and stores the result into the destination vector C. This operation
-- does not shift signal.
+- _chive64_isllu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Left shift each 32-bit element in source vector A[0:63] the amount specified 
+- in source vector B[0:63] and stores the result into the destination vector 
+- C[0:63]. This operation does not shift signal.
 -
 - 32-bit Shift Left Logical (2048 integers):
-- _chive2K_sll(__hi32u *a, __hi32u *b, __hi32u *c)
-- Left shifts each element in source vector A the amount specified in source
-- vector B and stores the result into the destination vector C. This operation
-- does not shift signal.
+- _chive2K_isllu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Left shift each 32-bit element in source vector A[0:2047] the amount specified 
+- in source vector B[0:2047] and stores the result into the destination vector 
+- C[0:2047]. This operation does not shift signal.
 -
 - 32-bit Shift Right Logical (64 integers):
-- _chive64_srl(__hi32u *a, __hi32u *b, __hi32u *c)
-- Right shifts each element in source vector A the amount specified in source
-- vector B and stores the result into the destination vector C. This operation
-- does not shift signal.
+- _chive64_isrlu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Right shift each 32-bit element in source vector A[0:63] the amount specified 
+- in source vector B[0:63] and stores the result into the destination vector 
+- C[0:63]. This operation does not shift signal.
 -
 - 32-bit Shift Right Logical (2048 integers):
-- _chive2K_srl(__hi32u *a, __hi32u *b, __hi32u *c)
-- Right shifts each element in source vector A the amount specified in source
-- vector B and stores the result into the destination vector C. This operation
-- does not shift signal.
+- _chive2K_isrlu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Right shift each 32-bit element in source vector A[0:2047] the amount specified 
+- in source vector B[0:2047] and stores the result into the destination vector 
+- C[0:2047]. This operation does not shift signal.
 -
 - 32-bit Shift Right Arithmetic (64 integers):
-- _chive64_sra(__hi32s *a, __hi32s *b, __hi32s *c)
-- Right shifts each element in source vector A the amount specified in source
-- vector B and stores the result into the destination vector C. This operation
-- shifts signal.
+- _chive64_isras(__ch32s *a, __ch32s *b, __ch32s *c)
+- Right shift each 32-bit element in source vector A[0:63] the amount specified 
+- in source vector B[0:63] and stores the result into the destination vector 
+- C[0:63]. This operation shifts signal.
 -
 - 32-bit Shift Right Arithmetic (2048 integers):
-- _chive2K_sra(__hi32s *a, __hi32s *b, __hi32s *c)
-- Right shifts each element in source vector A the amount specified in source
-- vector B and stores the result into the destination vector C. This operation
-- shifts signal.
+- _chive2K_isras(__ch32s *a, __ch32s *b, __ch32s *c)
+- Right shift each 32-bit element in source vector A[0:2047] the amount specified 
+- in source vector B[0:2047] and stores the result into the destination vector 
+- C[0:2047]. This operation shifts signal.
 -
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - MULTIPLICATION/DIVISION:
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
 - 32-bit Divide Only (64 integers):
-- _chive64_divs(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed division between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive64_idivs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform a signed division between 32-bit elements from source vectors A[0:63] 
+- and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Divide Only (2048 integers):
-- _chive2K_divs(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed division between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive2K_idivs(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform a signed division between 32-bit elements from source vectors A[0:2047] 
+- and B[0:2047] and stores the result into the destination vector C[0:2047].
 -
 - 32-bit Divide Only Unsigned (64 integers):
-- _chive64_divu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned division between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive64_idivu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform an unsigned division between 32-bit elements from source vectors 
+- A[0:63] and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Divide Only Unsigned (2048 integers):
-- _chive2K_divu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned division between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive2K_idivu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform an unsigned division between 32-bit elements from source vectors 
+- A[0:2047] and B[0:2047] and stores the result into the destination vector 
+- C[0:2047].
 -
 - 32-bit Module Only (64 integers):
-- _chive64_mods(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed module operation between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive64_imods(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform a signed module operation between 32-bit elements from source vectors 
+- A[0:63] and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Module Only (2048 integers):
-- _chive2K_mods(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed module operation between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive2K_imods(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform a signed module operation between 32-bit elements of source vectors 
+- A[0:2047] and B[0:2047] and stores the result into the destination vector 
+- C[0:2047].
 -
 - 32-bit Module Only Unsigned (64 integers):
-- _chive64_modu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned module operation between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive64_imodu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform an unsigned module operation between 32-bit elements from source 
+- vectors A[0:63] and B[0:63] and stores the result into the destination vector 
+- C[0:63].
 -
 - 32-bit Module Only Unsigned (2048 integers):
-- _chive2K_modu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned module operation between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive2K_imodu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform an unsigned module operation between 32-bit elements from source 
+- vectors A[0:2047] and B and stores the result into the destination vector 
+- C[0:2047].
 -
 - 32-bit Multiply (64 integers):
-- _chive64_mults(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed multiplication between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- _chive64_imuls(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform signed multiplication between 32-bit elements from source vectors 
+- A[0:63] and B[0:63] and stores the result into the destination vector 
+- C[0:63].
 -
 - 32-bit Multiply (2048 integers):
-- _chive2K_mults(__hi32s *a, __hi32s *b, __hi32s *c)
-- Performs signed multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive2K_imuls(__ch32s *a, __ch32s *b, __ch32s *c)
+- Perform signed multiplication between 32-bit elements from source vectors 
+- A[0:2047] and B[0:2047] and stores the result into the destination vector 
+- C[0:2047].
 -
 - 32-bit Multiply Unsigned (64 integers):
-- _chive64_multu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive64_imulu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform unsigned multiplication between 32-bit elements from source vectors 
+- A[0:63] and B[0:63] and stores the result into the destination vector C[0:63].
 -
 - 32-bit Multiply Unsigned (2048 integers):
-- _chive2K_multu(__hi32u *a, __hi32u *b, __hi32u *c)
-- Performs unsigned multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive2K_imulu(__ch32u *a, __ch32u *b, __ch32u *c)
+- Perform unsigned multiplication between 32-bit elements from source vectors 
+- A[0:2047] and B[0:2047] and stores the result into the destination vector 
+- C[0:2047].
 -
 - 64-bit Multiply (32 integers):
-- _chive32_mults(__hi64s *a, __hi64s *b, __hi64s *c)
-- Performs signed multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive32_imuls(__ch64s *a, __ch64s *b, __ch64s *c)
+- Perform signed multiplication between 32-bit elements from source vectors 
+- A[0:31] and B[0:31] and stores the result into the destination vector C[0:31].
 -
 - 64-bit Multiply (1024 integers):
-- _chive1K_mults(__hi64s *a, __hi64s *b, __hi64s *c)
-- Performs signed multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive1K_imuls(__ch64s *a, __ch64s *b, __ch64s *c)
+- Perform signed multiplication between 32-bit elements from source vectors 
+- A[0:1023] and B[0:1023] and stores the result into the destination vector 
+- C[0:1023].
 -
 - 64-bit Multiply Unsigned (32 integers):
-- _chive32_multu(__hi64u *a, __hi64u *b, __hi64u *c)
-- Performs unsigned multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive32_imulu(__ch64u *a, __ch64u *b, __ch64u *c)
+- Performs unsigned multiplication between 32-bit elements from source vectors 
+- A[0:31] and B[0:31] and stores the result into the destination vector C[0:31].
 -
 - 64-bit Multiply Unsigned (1024 integers):
-- _chive1K_multu(__hi64u *a, __hi64u *b, __hi64u *c)
-- Performs unsigned multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- _chive1K_imulu(__ch64u *a, __ch64u *b, __ch64u *c)
+- Perform unsigned multiplication between 32-bit elements from source vectors 
+- A[0:1023] and B[0:1023] and stores the result into the destination vector 
+- C[0:1023].
 -
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - IMMEDIATE:
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
 - 32-bit Move Immediate Data (64 integers):
-- _chive64_movs(__hi32s *a, __hi32s *b)
-- Replicates a signed immediate b into the vector A.
+- _chive64_imovs(__ch32s *a, __ch32s b)
+- Replicate a signed 32-bit immediate b into the vector A[0:63].
 -
 - 32-bit Move Immediate Data (2048 integers):
-- _chive2K_movs(__hi32s *a, __hi32s *b)
-- Replicates a signed immediate b into the vector A.
+- _chive2K_imovs(__ch32s *a, __ch32s b)
+- Replicate a signed 32-bit immediate b into the vector A[0:2047].
 -
 - 32-bit Move Immediate Data Unsigned (64 integers):
-- _chive64_movu(__hi32u *a, __hi32u *b)
-- Replicates a unsigned immediate b into the vector A.
+- _chive64_imovu(__ch32u *a, __ch32u b)
+- Replicate a unsigned 32-bit immediate b into the vector A[0:63].
 -
 - 32-bit Move Immediate Data (2048 integers):
-- _chive2K_movu(__hi32u *a, __hi32u *b)
-- Replicates a unsigned immediate b into the vector A.
+- _chive2K_imovu(__ch32u *a, __ch32u b)
+- Replicate a unsigned 32-bit immediate b into the vector A[0:2047].
 -
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - kNN FLOAT INSTRUCTIONS:
 - ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
-- 32-bit Move Immediate Data (2048 floats):
-- _chive2K_fmovs(__ch32f *a, __ch32f b)
-- Replicates a signed immediate b into vector A.
+- 32-bit Move Immediate Data (64 floats):
+- _chive64_fmovs(__ch32f *a, __ch32f b)
+- Replicate a signed 32-bit floating-point immediate b into the vector A[0:63].
 -
-- 32-bit Subtract (2048 floats):
-- _chive2K_fsubs(__ch32f *a, __ch32f *b, __ch32f *c)
-- Performs signed subtraction between elements of source vectors A and B and
-- stores the result into the destination vector C.
+- 32-bit Subtract (64 floats):
+- _chive64_fsubs(__ch32f *a, __ch32f *b, __ch32f *c)
+- Perform signed subtraction between 32-bit floating-point elements source 
+- vectors A[0:63] and B[0:63] and stores the result into the destination vector 
+- C[0:63].
 -
-- 32-bit Multiply (2048 floats):
-- _chive2K_fmults(__ch32f *a, __ch32f *b, __ch32f *c)
-- Performs signed multiplication between elements of source vectors A and B
-- and stores the result into the destination vector C.
+- 32-bit Multiply (64 floats):
+- _chive64_fmuls(__ch32f *a, __ch32f *b, __ch32f *c)
+- Perform signed multiplication between 32-bit floating-point elements from 
+- source vectors A[0:63] and B[0:63] and stores the result into the destination 
+- vector C[0:63].
 -
-- 32-bit Cumulative Sum (2048 floats):
--_chive2K_fcsum(__ch32f *a, __ch32f *b, __ch32f *c)
-- Performs cumulative sum between elements of source vectors A and B and stores
-- the result into the destination variable C.
+- 32-bit Cumulative Sum (64 floats):
+- _chive64_fcsum(__ch32f *a, __ch32f *b)
+- Perform cumulative sum of the 32-bit floating-point elements from source vector 
+- A[0:63] in variable b.
 -
