@@ -6,70 +6,70 @@
 
 #include "vima.hpp"
 
-__vm32s *a32s64, *b32s64, *c32s64, *a32s2K, *b32s2K, *c32s2K, b32s = 1;
-__vm32u *a32u64, *b32u64, *c32u64, *a32u2K, *b32u2K, *c32u2K, b32u = 1;
-__vm64s *a64s32, *b64s32, *c64s32, *a64s1K, *b64s1K, *c64s1K;
-__vm64u *a64u32, *b64u32, *c64u32, *a64u1K, *b64u1K, *c64u1K;
-__vm32f *a32f64, *b32f64, *c32f64, b32f = 1;
+__v32s *a32s64, *b32s64, *c32s64, *a32s2K, *b32s2K, *c32s2K, b32s = 1;
+__v32u *a32u64, *b32u64, *c32u64, *a32u2K, *b32u2K, *c32u2K, b32u = 1;
+__v64s *a64s32, *b64s32, *c64s32, *a64s1K, *b64s1K, *c64s1K;
+__v64u *a64u32, *b64u32, *c64u32, *a64u1K, *b64u1K, *c64u1K;
+__v32f *a32f64, *b32f64, *c32f64, b32f = 1;
 
 int main() {
     srand(time(NULL));
 
-    a32s64 = (__vm32s *) malloc(sizeof(__vm32s) * VM64I);
-    b32s64 = (__vm32s *) malloc(sizeof(__vm32s) * VM64I);
-    c32s64 = (__vm32s *) malloc(sizeof(__vm32s) * VM64I);
+    a32s64 = (__v32s *) malloc(sizeof(__v32s) * VM64I);
+    b32s64 = (__v32s *) malloc(sizeof(__v32s) * VM64I);
+    c32s64 = (__v32s *) malloc(sizeof(__v32s) * VM64I);
 
-    a32u64 = (__vm32u *) malloc(sizeof(__vm32u) * VM64I);
-    b32u64 = (__vm32u *) malloc(sizeof(__vm32u) * VM64I);
-    c32u64 = (__vm32u *) malloc(sizeof(__vm32u) * VM64I);
+    a32u64 = (__v32u *) malloc(sizeof(__v32u) * VM64I);
+    b32u64 = (__v32u *) malloc(sizeof(__v32u) * VM64I);
+    c32u64 = (__v32u *) malloc(sizeof(__v32u) * VM64I);
 
     for (int i = 0; i < VM64I; i++) {
         a32s64[i] = 1 + (1 + (rand() % 10)); b32s64[i] = 1 + (rand() % 10);
         a32u64[i] = 1 + (1 + (rand() % 10)); b32u64[i] = 1 + (rand() % 10);
     }
 
-    a32s2K = (__vm32s *) malloc(sizeof(__vm32s) * VM2KI);
-    b32s2K = (__vm32s *) malloc(sizeof(__vm32s) * VM2KI);
-    c32s2K = (__vm32s *) malloc(sizeof(__vm32s) * VM2KI);
+    a32s2K = (__v32s *) malloc(sizeof(__v32s) * VM2KI);
+    b32s2K = (__v32s *) malloc(sizeof(__v32s) * VM2KI);
+    c32s2K = (__v32s *) malloc(sizeof(__v32s) * VM2KI);
 
-    a32u2K = (__vm32u *) malloc(sizeof(__vm32u) * VM2KI);
-    b32u2K = (__vm32u *) malloc(sizeof(__vm32u) * VM2KI);
-    c32u2K = (__vm32u *) malloc(sizeof(__vm32u) * VM2KI);
+    a32u2K = (__v32u *) malloc(sizeof(__v32u) * VM2KI);
+    b32u2K = (__v32u *) malloc(sizeof(__v32u) * VM2KI);
+    c32u2K = (__v32u *) malloc(sizeof(__v32u) * VM2KI);
 
     for (int i = 0; i < VM2KI; i++) {
         a32s2K[i] = 1 + (rand() % 10); b32s2K[i] = 1 + (rand() % 10);
         a32u2K[i] = 1 + (rand() % 10); b32u2K[i] = 1 + (rand() % 10);
     }
 
-    a64s32 = (__vm64s *) malloc(sizeof(__vm64s) * VM32L);
-    b64s32 = (__vm64s *) malloc(sizeof(__vm64s) * VM32L);
-    c64s32 = (__vm64s *) malloc(sizeof(__vm64s) * VM32L);
+    a64s32 = (__v64s *) malloc(sizeof(__v64s) * VM32L);
+    b64s32 = (__v64s *) malloc(sizeof(__v64s) * VM32L);
+    c64s32 = (__v64s *) malloc(sizeof(__v64s) * VM32L);
 
-    a64u32 = (__vm64u *) malloc(sizeof(__vm64u) * VM32L);
-    b64u32 = (__vm64u *) malloc(sizeof(__vm64u) * VM32L);
-    c64u32 = (__vm64u *) malloc(sizeof(__vm64u) * VM32L);
+    a64u32 = (__v64u *) malloc(sizeof(__v64u) * VM32L);
+    b64u32 = (__v64u *) malloc(sizeof(__v64u) * VM32L);
+    c64u32 = (__v64u *) malloc(sizeof(__v64u) * VM32L);
 
     for (int i = 0; i < VM32L; i++) {
         a64s32[i] = 1 + (rand() % 10); b64s32[i] = 1 + (rand() % 10);
         a64u32[i] = 1 + (rand() % 10); b64u32[i] = 1 + (rand() % 10);
     }
 
-    a64s1K = (__vm64s *) malloc(sizeof(__vm64s) * VM1KL);
-    b64s1K = (__vm64s *) malloc(sizeof(__vm64s) * VM1KL);
-    c64s1K = (__vm64s *) malloc(sizeof(__vm64s) * VM1KL);
+    a64s1K = (__v64s *) malloc(sizeof(__v64s) * VM1KL);
+    b64s1K = (__v64s *) malloc(sizeof(__v64s) * VM1KL);
+    c64s1K = (__v64s *) malloc(sizeof(__v64s) * VM1KL);
 
-    a64u1K = (__vm64u *) malloc(sizeof(__vm64u) * VM1KL);
-    b64u1K = (__vm64u *) malloc(sizeof(__vm64u) * VM1KL);
-    c64u1K = (__vm64u *) malloc(sizeof(__vm64u) * VM1KL);
+    a64u1K = (__v64u *) malloc(sizeof(__v64u) * VM1KL);
+    b64u1K = (__v64u *) malloc(sizeof(__v64u) * VM1KL);
+    c64u1K = (__v64u *) malloc(sizeof(__v64u) * VM1KL);
 
     for (int i = 0; i < VM1KL; i++) {
         a64s1K[i] = 1 + (rand() % 10); b64s1K[i] = 1 + (rand() % 10);
         a64u1K[i] = 1 + (rand() % 10); b64u1K[i] = 1 + (rand() % 10);
     }
 
-    a32f64 = (__vm32f *) malloc(sizeof(__vm32f) * VM64I);
-    b32f64 = (__vm32f *) malloc(sizeof(__vm32f) * VM64I);
-    c32f64 = (__vm32f *) malloc(sizeof(__vm32f) * VM64I);
+    a32f64 = (__v32f *) malloc(sizeof(__v32f) * VM64I);
+    b32f64 = (__v32f *) malloc(sizeof(__v32f) * VM64I);
+    c32f64 = (__v32f *) malloc(sizeof(__v32f) * VM64I);
 
     for (int i = 0; i < VM64I; i++) {
         a32f64[i] = 1 + (rand() % 10); b32f64[i] = 1 + (rand() % 10);
