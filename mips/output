@@ -1,0 +1,1145 @@
+
+mips: formato do arquivo elf64-x86-64
+
+
+Desmontagem da seção .init:
+
+0000000000000528 <_init>:
+ 528:	48 83 ec 08          	sub    $0x8,%rsp
+ 52c:	48 8b 05 b5 2a 20 00 	mov    0x202ab5(%rip),%rax        # 202fe8 <__gmon_start__>
+ 533:	48 85 c0             	test   %rax,%rax
+ 536:	74 02                	je     53a <_init+0x12>
+ 538:	ff d0                	callq  *%rax
+ 53a:	48 83 c4 08          	add    $0x8,%rsp
+ 53e:	c3                   	retq   
+
+Desmontagem da seção .plt:
+
+0000000000000540 <.plt>:
+ 540:	ff 35 72 2a 20 00    	pushq  0x202a72(%rip)        # 202fb8 <_GLOBAL_OFFSET_TABLE_+0x8>
+ 546:	ff 25 74 2a 20 00    	jmpq   *0x202a74(%rip)        # 202fc0 <_GLOBAL_OFFSET_TABLE_+0x10>
+ 54c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000000550 <puts@plt>:
+ 550:	ff 25 72 2a 20 00    	jmpq   *0x202a72(%rip)        # 202fc8 <puts@GLIBC_2.2.5>
+ 556:	68 00 00 00 00       	pushq  $0x0
+ 55b:	e9 e0 ff ff ff       	jmpq   540 <.plt>
+
+0000000000000560 <printf@plt>:
+ 560:	ff 25 6a 2a 20 00    	jmpq   *0x202a6a(%rip)        # 202fd0 <printf@GLIBC_2.2.5>
+ 566:	68 01 00 00 00       	pushq  $0x1
+ 56b:	e9 d0 ff ff ff       	jmpq   540 <.plt>
+
+Desmontagem da seção .plt.got:
+
+0000000000000570 <__cxa_finalize@plt>:
+ 570:	ff 25 82 2a 20 00    	jmpq   *0x202a82(%rip)        # 202ff8 <__cxa_finalize@GLIBC_2.2.5>
+ 576:	66 90                	xchg   %ax,%ax
+
+Desmontagem da seção .text:
+
+0000000000000580 <_start>:
+     580:	31 ed                	xor    %ebp,%ebp
+     582:	49 89 d1             	mov    %rdx,%r9
+     585:	5e                   	pop    %rsi
+     586:	48 89 e2             	mov    %rsp,%rdx
+     589:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+     58d:	50                   	push   %rax
+     58e:	54                   	push   %rsp
+     58f:	4c 8d 05 ea 10 00 00 	lea    0x10ea(%rip),%r8        # 1680 <__libc_csu_fini>
+     596:	48 8d 0d 73 10 00 00 	lea    0x1073(%rip),%rcx        # 1610 <__libc_csu_init>
+     59d:	48 8d 3d e6 00 00 00 	lea    0xe6(%rip),%rdi        # 68a <main>
+     5a4:	ff 15 36 2a 20 00    	callq  *0x202a36(%rip)        # 202fe0 <__libc_start_main@GLIBC_2.2.5>
+     5aa:	f4                   	hlt    
+     5ab:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+00000000000005b0 <deregister_tm_clones>:
+     5b0:	48 8d 3d 69 2a 20 00 	lea    0x202a69(%rip),%rdi        # 203020 <__TMC_END__>
+     5b7:	55                   	push   %rbp
+     5b8:	48 8d 05 61 2a 20 00 	lea    0x202a61(%rip),%rax        # 203020 <__TMC_END__>
+     5bf:	48 39 f8             	cmp    %rdi,%rax
+     5c2:	48 89 e5             	mov    %rsp,%rbp
+     5c5:	74 19                	je     5e0 <deregister_tm_clones+0x30>
+     5c7:	48 8b 05 0a 2a 20 00 	mov    0x202a0a(%rip),%rax        # 202fd8 <_ITM_deregisterTMCloneTable>
+     5ce:	48 85 c0             	test   %rax,%rax
+     5d1:	74 0d                	je     5e0 <deregister_tm_clones+0x30>
+     5d3:	5d                   	pop    %rbp
+     5d4:	ff e0                	jmpq   *%rax
+     5d6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     5dd:	00 00 00 
+     5e0:	5d                   	pop    %rbp
+     5e1:	c3                   	retq   
+     5e2:	0f 1f 40 00          	nopl   0x0(%rax)
+     5e6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     5ed:	00 00 00 
+
+00000000000005f0 <register_tm_clones>:
+     5f0:	48 8d 3d 29 2a 20 00 	lea    0x202a29(%rip),%rdi        # 203020 <__TMC_END__>
+     5f7:	48 8d 35 22 2a 20 00 	lea    0x202a22(%rip),%rsi        # 203020 <__TMC_END__>
+     5fe:	55                   	push   %rbp
+     5ff:	48 29 fe             	sub    %rdi,%rsi
+     602:	48 89 e5             	mov    %rsp,%rbp
+     605:	48 c1 fe 03          	sar    $0x3,%rsi
+     609:	48 89 f0             	mov    %rsi,%rax
+     60c:	48 c1 e8 3f          	shr    $0x3f,%rax
+     610:	48 01 c6             	add    %rax,%rsi
+     613:	48 d1 fe             	sar    %rsi
+     616:	74 18                	je     630 <register_tm_clones+0x40>
+     618:	48 8b 05 d1 29 20 00 	mov    0x2029d1(%rip),%rax        # 202ff0 <_ITM_registerTMCloneTable>
+     61f:	48 85 c0             	test   %rax,%rax
+     622:	74 0c                	je     630 <register_tm_clones+0x40>
+     624:	5d                   	pop    %rbp
+     625:	ff e0                	jmpq   *%rax
+     627:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+     62e:	00 00 
+     630:	5d                   	pop    %rbp
+     631:	c3                   	retq   
+     632:	0f 1f 40 00          	nopl   0x0(%rax)
+     636:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     63d:	00 00 00 
+
+0000000000000640 <__do_global_dtors_aux>:
+     640:	80 3d d9 29 20 00 00 	cmpb   $0x0,0x2029d9(%rip)        # 203020 <__TMC_END__>
+     647:	75 2f                	jne    678 <__do_global_dtors_aux+0x38>
+     649:	48 83 3d a7 29 20 00 	cmpq   $0x0,0x2029a7(%rip)        # 202ff8 <__cxa_finalize@GLIBC_2.2.5>
+     650:	00 
+     651:	55                   	push   %rbp
+     652:	48 89 e5             	mov    %rsp,%rbp
+     655:	74 0c                	je     663 <__do_global_dtors_aux+0x23>
+     657:	48 8b 3d aa 29 20 00 	mov    0x2029aa(%rip),%rdi        # 203008 <__dso_handle>
+     65e:	e8 0d ff ff ff       	callq  570 <__cxa_finalize@plt>
+     663:	e8 48 ff ff ff       	callq  5b0 <deregister_tm_clones>
+     668:	c6 05 b1 29 20 00 01 	movb   $0x1,0x2029b1(%rip)        # 203020 <__TMC_END__>
+     66f:	5d                   	pop    %rbp
+     670:	c3                   	retq   
+     671:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+     678:	f3 c3                	repz retq 
+     67a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000000680 <frame_dummy>:
+     680:	55                   	push   %rbp
+     681:	48 89 e5             	mov    %rsp,%rbp
+     684:	5d                   	pop    %rbp
+     685:	e9 66 ff ff ff       	jmpq   5f0 <register_tm_clones>
+
+000000000000068a <main>:
+     68a:	55                   	push   %rbp
+     68b:	48 89 e5             	mov    %rsp,%rbp
+     68e:	48 8d 3d 04 10 00 00 	lea    0x1004(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     695:	e8 b6 fe ff ff       	callq  550 <puts@plt>
+     69a:	48 8d 3d 08 10 00 00 	lea    0x1008(%rip),%rdi        # 16a9 <_ZStL19piecewise_construct+0x11>
+     6a1:	e8 aa fe ff ff       	callq  550 <puts@plt>
+     6a6:	48 8d 3d ec 0f 00 00 	lea    0xfec(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     6ad:	e8 9e fe ff ff       	callq  550 <puts@plt>
+     6b2:	8b 15 5c 29 20 00    	mov    0x20295c(%rip),%edx        # 203014 <op2_32s1>
+     6b8:	8b 05 52 29 20 00    	mov    0x202952(%rip),%eax        # 203010 <op1_32s1>
+     6be:	89 c6                	mov    %eax,%esi
+     6c0:	48 8d 3d f9 0f 00 00 	lea    0xff9(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     6c7:	b8 00 00 00 00       	mov    $0x0,%eax
+     6cc:	e8 8f fe ff ff       	callq  560 <printf@plt>
+     6d1:	8b 15 3d 29 20 00    	mov    0x20293d(%rip),%edx        # 203014 <op2_32s1>
+     6d7:	8b 05 33 29 20 00    	mov    0x202933(%rip),%eax        # 203010 <op1_32s1>
+     6dd:	89 d6                	mov    %edx,%esi
+     6df:	89 c7                	mov    %eax,%edi
+     6e1:	e8 b9 0c 00 00       	callq  139f <_Z10_mps32_addii>
+     6e6:	89 05 3c 29 20 00    	mov    %eax,0x20293c(%rip)        # 203028 <ret32s1>
+     6ec:	8b 05 36 29 20 00    	mov    0x202936(%rip),%eax        # 203028 <ret32s1>
+     6f2:	89 c6                	mov    %eax,%esi
+     6f4:	48 8d 3d e8 0f 00 00 	lea    0xfe8(%rip),%rdi        # 16e3 <_ZStL19piecewise_construct+0x4b>
+     6fb:	b8 00 00 00 00       	mov    $0x0,%eax
+     700:	e8 5b fe ff ff       	callq  560 <printf@plt>
+     705:	48 8d 3d 8d 0f 00 00 	lea    0xf8d(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     70c:	e8 3f fe ff ff       	callq  550 <puts@plt>
+     711:	48 8d 3d e5 0f 00 00 	lea    0xfe5(%rip),%rdi        # 16fd <_ZStL19piecewise_construct+0x65>
+     718:	e8 33 fe ff ff       	callq  550 <puts@plt>
+     71d:	48 8d 3d 75 0f 00 00 	lea    0xf75(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     724:	e8 27 fe ff ff       	callq  550 <puts@plt>
+     729:	8b 15 ed 28 20 00    	mov    0x2028ed(%rip),%edx        # 20301c <op2_32u1>
+     72f:	8b 05 e3 28 20 00    	mov    0x2028e3(%rip),%eax        # 203018 <op1_32u1>
+     735:	89 c6                	mov    %eax,%esi
+     737:	48 8d 3d 82 0f 00 00 	lea    0xf82(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     73e:	b8 00 00 00 00       	mov    $0x0,%eax
+     743:	e8 18 fe ff ff       	callq  560 <printf@plt>
+     748:	8b 15 ce 28 20 00    	mov    0x2028ce(%rip),%edx        # 20301c <op2_32u1>
+     74e:	8b 05 c4 28 20 00    	mov    0x2028c4(%rip),%eax        # 203018 <op1_32u1>
+     754:	89 d6                	mov    %edx,%esi
+     756:	89 c7                	mov    %eax,%edi
+     758:	e8 56 0c 00 00       	callq  13b3 <_Z11_mps32_addujj>
+     75d:	89 05 c9 28 20 00    	mov    %eax,0x2028c9(%rip)        # 20302c <ret32u1>
+     763:	8b 05 c3 28 20 00    	mov    0x2028c3(%rip),%eax        # 20302c <ret32u1>
+     769:	89 c6                	mov    %eax,%esi
+     76b:	48 8d 3d 9d 0f 00 00 	lea    0xf9d(%rip),%rdi        # 170f <_ZStL19piecewise_construct+0x77>
+     772:	b8 00 00 00 00       	mov    $0x0,%eax
+     777:	e8 e4 fd ff ff       	callq  560 <printf@plt>
+     77c:	48 8d 3d 16 0f 00 00 	lea    0xf16(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     783:	e8 c8 fd ff ff       	callq  550 <puts@plt>
+     788:	48 8d 3d 9b 0f 00 00 	lea    0xf9b(%rip),%rdi        # 172a <_ZStL19piecewise_construct+0x92>
+     78f:	e8 bc fd ff ff       	callq  550 <puts@plt>
+     794:	48 8d 3d fe 0e 00 00 	lea    0xefe(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     79b:	e8 b0 fd ff ff       	callq  550 <puts@plt>
+     7a0:	8b 15 6e 28 20 00    	mov    0x20286e(%rip),%edx        # 203014 <op2_32s1>
+     7a6:	8b 05 64 28 20 00    	mov    0x202864(%rip),%eax        # 203010 <op1_32s1>
+     7ac:	89 c6                	mov    %eax,%esi
+     7ae:	48 8d 3d 0b 0f 00 00 	lea    0xf0b(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     7b5:	b8 00 00 00 00       	mov    $0x0,%eax
+     7ba:	e8 a1 fd ff ff       	callq  560 <printf@plt>
+     7bf:	8b 15 4f 28 20 00    	mov    0x20284f(%rip),%edx        # 203014 <op2_32s1>
+     7c5:	8b 05 45 28 20 00    	mov    0x202845(%rip),%eax        # 203010 <op1_32s1>
+     7cb:	89 d6                	mov    %edx,%esi
+     7cd:	89 c7                	mov    %eax,%edi
+     7cf:	e8 f3 0b 00 00       	callq  13c7 <_Z10_mps32_subii>
+     7d4:	89 05 4e 28 20 00    	mov    %eax,0x20284e(%rip)        # 203028 <ret32s1>
+     7da:	8b 05 48 28 20 00    	mov    0x202848(%rip),%eax        # 203028 <ret32s1>
+     7e0:	89 c6                	mov    %eax,%esi
+     7e2:	48 8d 3d 53 0f 00 00 	lea    0xf53(%rip),%rdi        # 173c <_ZStL19piecewise_construct+0xa4>
+     7e9:	b8 00 00 00 00       	mov    $0x0,%eax
+     7ee:	e8 6d fd ff ff       	callq  560 <printf@plt>
+     7f3:	48 8d 3d 9f 0e 00 00 	lea    0xe9f(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     7fa:	e8 51 fd ff ff       	callq  550 <puts@plt>
+     7ff:	48 8d 3d 50 0f 00 00 	lea    0xf50(%rip),%rdi        # 1756 <_ZStL19piecewise_construct+0xbe>
+     806:	e8 45 fd ff ff       	callq  550 <puts@plt>
+     80b:	48 8d 3d 87 0e 00 00 	lea    0xe87(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     812:	e8 39 fd ff ff       	callq  550 <puts@plt>
+     817:	8b 15 ff 27 20 00    	mov    0x2027ff(%rip),%edx        # 20301c <op2_32u1>
+     81d:	8b 05 f5 27 20 00    	mov    0x2027f5(%rip),%eax        # 203018 <op1_32u1>
+     823:	89 c6                	mov    %eax,%esi
+     825:	48 8d 3d 94 0e 00 00 	lea    0xe94(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     82c:	b8 00 00 00 00       	mov    $0x0,%eax
+     831:	e8 2a fd ff ff       	callq  560 <printf@plt>
+     836:	8b 15 e0 27 20 00    	mov    0x2027e0(%rip),%edx        # 20301c <op2_32u1>
+     83c:	8b 05 d6 27 20 00    	mov    0x2027d6(%rip),%eax        # 203018 <op1_32u1>
+     842:	89 d6                	mov    %edx,%esi
+     844:	89 c7                	mov    %eax,%edi
+     846:	e8 8e 0b 00 00       	callq  13d9 <_Z11_mps32_subujj>
+     84b:	89 05 db 27 20 00    	mov    %eax,0x2027db(%rip)        # 20302c <ret32u1>
+     851:	8b 05 d5 27 20 00    	mov    0x2027d5(%rip),%eax        # 20302c <ret32u1>
+     857:	89 c6                	mov    %eax,%esi
+     859:	48 8d 3d 08 0f 00 00 	lea    0xf08(%rip),%rdi        # 1768 <_ZStL19piecewise_construct+0xd0>
+     860:	b8 00 00 00 00       	mov    $0x0,%eax
+     865:	e8 f6 fc ff ff       	callq  560 <printf@plt>
+     86a:	48 8d 3d 28 0e 00 00 	lea    0xe28(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     871:	e8 da fc ff ff       	callq  550 <puts@plt>
+     876:	48 8d 3d 06 0f 00 00 	lea    0xf06(%rip),%rdi        # 1783 <_ZStL19piecewise_construct+0xeb>
+     87d:	e8 ce fc ff ff       	callq  550 <puts@plt>
+     882:	48 8d 3d 10 0e 00 00 	lea    0xe10(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     889:	e8 c2 fc ff ff       	callq  550 <puts@plt>
+     88e:	8b 15 80 27 20 00    	mov    0x202780(%rip),%edx        # 203014 <op2_32s1>
+     894:	8b 05 76 27 20 00    	mov    0x202776(%rip),%eax        # 203010 <op1_32s1>
+     89a:	89 c6                	mov    %eax,%esi
+     89c:	48 8d 3d 1d 0e 00 00 	lea    0xe1d(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     8a3:	b8 00 00 00 00       	mov    $0x0,%eax
+     8a8:	e8 b3 fc ff ff       	callq  560 <printf@plt>
+     8ad:	8b 15 61 27 20 00    	mov    0x202761(%rip),%edx        # 203014 <op2_32s1>
+     8b3:	8b 05 57 27 20 00    	mov    0x202757(%rip),%eax        # 203010 <op1_32s1>
+     8b9:	89 d6                	mov    %edx,%esi
+     8bb:	89 c7                	mov    %eax,%edi
+     8bd:	e8 29 0b 00 00       	callq  13eb <_Z11_mps32_addiii>
+     8c2:	89 05 60 27 20 00    	mov    %eax,0x202760(%rip)        # 203028 <ret32s1>
+     8c8:	8b 05 5a 27 20 00    	mov    0x20275a(%rip),%eax        # 203028 <ret32s1>
+     8ce:	89 c6                	mov    %eax,%esi
+     8d0:	48 8d 3d be 0e 00 00 	lea    0xebe(%rip),%rdi        # 1795 <_ZStL19piecewise_construct+0xfd>
+     8d7:	b8 00 00 00 00       	mov    $0x0,%eax
+     8dc:	e8 7f fc ff ff       	callq  560 <printf@plt>
+     8e1:	48 8d 3d b1 0d 00 00 	lea    0xdb1(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     8e8:	e8 63 fc ff ff       	callq  550 <puts@plt>
+     8ed:	48 8d 3d bc 0e 00 00 	lea    0xebc(%rip),%rdi        # 17b0 <_ZStL19piecewise_construct+0x118>
+     8f4:	e8 57 fc ff ff       	callq  550 <puts@plt>
+     8f9:	48 8d 3d 99 0d 00 00 	lea    0xd99(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     900:	e8 4b fc ff ff       	callq  550 <puts@plt>
+     905:	8b 15 11 27 20 00    	mov    0x202711(%rip),%edx        # 20301c <op2_32u1>
+     90b:	8b 05 07 27 20 00    	mov    0x202707(%rip),%eax        # 203018 <op1_32u1>
+     911:	89 c6                	mov    %eax,%esi
+     913:	48 8d 3d a6 0d 00 00 	lea    0xda6(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     91a:	b8 00 00 00 00       	mov    $0x0,%eax
+     91f:	e8 3c fc ff ff       	callq  560 <printf@plt>
+     924:	8b 15 f2 26 20 00    	mov    0x2026f2(%rip),%edx        # 20301c <op2_32u1>
+     92a:	8b 05 e8 26 20 00    	mov    0x2026e8(%rip),%eax        # 203018 <op1_32u1>
+     930:	89 d6                	mov    %edx,%esi
+     932:	89 c7                	mov    %eax,%edi
+     934:	e8 c6 0a 00 00       	callq  13ff <_Z12_mps32_addiujj>
+     939:	89 05 ed 26 20 00    	mov    %eax,0x2026ed(%rip)        # 20302c <ret32u1>
+     93f:	8b 05 e7 26 20 00    	mov    0x2026e7(%rip),%eax        # 20302c <ret32u1>
+     945:	89 c6                	mov    %eax,%esi
+     947:	48 8d 3d 74 0e 00 00 	lea    0xe74(%rip),%rdi        # 17c2 <_ZStL19piecewise_construct+0x12a>
+     94e:	b8 00 00 00 00       	mov    $0x0,%eax
+     953:	e8 08 fc ff ff       	callq  560 <printf@plt>
+     958:	48 8d 3d 3a 0d 00 00 	lea    0xd3a(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     95f:	e8 ec fb ff ff       	callq  550 <puts@plt>
+     964:	48 8d 3d 73 0e 00 00 	lea    0xe73(%rip),%rdi        # 17de <_ZStL19piecewise_construct+0x146>
+     96b:	e8 e0 fb ff ff       	callq  550 <puts@plt>
+     970:	48 8d 3d 22 0d 00 00 	lea    0xd22(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     977:	e8 d4 fb ff ff       	callq  550 <puts@plt>
+     97c:	8b 15 9a 26 20 00    	mov    0x20269a(%rip),%edx        # 20301c <op2_32u1>
+     982:	8b 05 90 26 20 00    	mov    0x202690(%rip),%eax        # 203018 <op1_32u1>
+     988:	89 c6                	mov    %eax,%esi
+     98a:	48 8d 3d 2f 0d 00 00 	lea    0xd2f(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     991:	b8 00 00 00 00       	mov    $0x0,%eax
+     996:	e8 c5 fb ff ff       	callq  560 <printf@plt>
+     99b:	8b 15 7b 26 20 00    	mov    0x20267b(%rip),%edx        # 20301c <op2_32u1>
+     9a1:	8b 05 71 26 20 00    	mov    0x202671(%rip),%eax        # 203018 <op1_32u1>
+     9a7:	89 d6                	mov    %edx,%esi
+     9a9:	89 c7                	mov    %eax,%edi
+     9ab:	e8 63 0a 00 00       	callq  1413 <_Z10_mps32_andjj>
+     9b0:	89 05 76 26 20 00    	mov    %eax,0x202676(%rip)        # 20302c <ret32u1>
+     9b6:	8b 05 70 26 20 00    	mov    0x202670(%rip),%eax        # 20302c <ret32u1>
+     9bc:	89 c6                	mov    %eax,%esi
+     9be:	48 8d 3d 2b 0e 00 00 	lea    0xe2b(%rip),%rdi        # 17f0 <_ZStL19piecewise_construct+0x158>
+     9c5:	b8 00 00 00 00       	mov    $0x0,%eax
+     9ca:	e8 91 fb ff ff       	callq  560 <printf@plt>
+     9cf:	48 8d 3d c3 0c 00 00 	lea    0xcc3(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     9d6:	e8 75 fb ff ff       	callq  550 <puts@plt>
+     9db:	48 8d 3d 28 0e 00 00 	lea    0xe28(%rip),%rdi        # 180a <_ZStL19piecewise_construct+0x172>
+     9e2:	e8 69 fb ff ff       	callq  550 <puts@plt>
+     9e7:	48 8d 3d ab 0c 00 00 	lea    0xcab(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     9ee:	e8 5d fb ff ff       	callq  550 <puts@plt>
+     9f3:	8b 15 23 26 20 00    	mov    0x202623(%rip),%edx        # 20301c <op2_32u1>
+     9f9:	8b 05 19 26 20 00    	mov    0x202619(%rip),%eax        # 203018 <op1_32u1>
+     9ff:	89 c6                	mov    %eax,%esi
+     a01:	48 8d 3d b8 0c 00 00 	lea    0xcb8(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     a08:	b8 00 00 00 00       	mov    $0x0,%eax
+     a0d:	e8 4e fb ff ff       	callq  560 <printf@plt>
+     a12:	8b 15 04 26 20 00    	mov    0x202604(%rip),%edx        # 20301c <op2_32u1>
+     a18:	8b 05 fa 25 20 00    	mov    0x2025fa(%rip),%eax        # 203018 <op1_32u1>
+     a1e:	89 d6                	mov    %edx,%esi
+     a20:	89 c7                	mov    %eax,%edi
+     a22:	e8 fe 09 00 00       	callq  1425 <_Z10_mps32_norjj>
+     a27:	89 05 ff 25 20 00    	mov    %eax,0x2025ff(%rip)        # 20302c <ret32u1>
+     a2d:	8b 05 f9 25 20 00    	mov    0x2025f9(%rip),%eax        # 20302c <ret32u1>
+     a33:	89 c6                	mov    %eax,%esi
+     a35:	48 8d 3d e0 0d 00 00 	lea    0xde0(%rip),%rdi        # 181c <_ZStL19piecewise_construct+0x184>
+     a3c:	b8 00 00 00 00       	mov    $0x0,%eax
+     a41:	e8 1a fb ff ff       	callq  560 <printf@plt>
+     a46:	48 8d 3d 4c 0c 00 00 	lea    0xc4c(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     a4d:	e8 fe fa ff ff       	callq  550 <puts@plt>
+     a52:	48 8d 3d dd 0d 00 00 	lea    0xddd(%rip),%rdi        # 1836 <_ZStL19piecewise_construct+0x19e>
+     a59:	e8 f2 fa ff ff       	callq  550 <puts@plt>
+     a5e:	48 8d 3d 34 0c 00 00 	lea    0xc34(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     a65:	e8 e6 fa ff ff       	callq  550 <puts@plt>
+     a6a:	8b 15 ac 25 20 00    	mov    0x2025ac(%rip),%edx        # 20301c <op2_32u1>
+     a70:	8b 05 a2 25 20 00    	mov    0x2025a2(%rip),%eax        # 203018 <op1_32u1>
+     a76:	89 c6                	mov    %eax,%esi
+     a78:	48 8d 3d 41 0c 00 00 	lea    0xc41(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     a7f:	b8 00 00 00 00       	mov    $0x0,%eax
+     a84:	e8 d7 fa ff ff       	callq  560 <printf@plt>
+     a89:	8b 15 8d 25 20 00    	mov    0x20258d(%rip),%edx        # 20301c <op2_32u1>
+     a8f:	8b 05 83 25 20 00    	mov    0x202583(%rip),%eax        # 203018 <op1_32u1>
+     a95:	89 d6                	mov    %edx,%esi
+     a97:	89 c7                	mov    %eax,%edi
+     a99:	e8 9b 09 00 00       	callq  1439 <_Z9_mps32_orjj>
+     a9e:	89 05 88 25 20 00    	mov    %eax,0x202588(%rip)        # 20302c <ret32u1>
+     aa4:	8b 05 82 25 20 00    	mov    0x202582(%rip),%eax        # 20302c <ret32u1>
+     aaa:	89 c6                	mov    %eax,%esi
+     aac:	48 8d 3d 95 0d 00 00 	lea    0xd95(%rip),%rdi        # 1848 <_ZStL19piecewise_construct+0x1b0>
+     ab3:	b8 00 00 00 00       	mov    $0x0,%eax
+     ab8:	e8 a3 fa ff ff       	callq  560 <printf@plt>
+     abd:	48 8d 3d d5 0b 00 00 	lea    0xbd5(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     ac4:	e8 87 fa ff ff       	callq  550 <puts@plt>
+     ac9:	48 8d 3d 91 0d 00 00 	lea    0xd91(%rip),%rdi        # 1861 <_ZStL19piecewise_construct+0x1c9>
+     ad0:	e8 7b fa ff ff       	callq  550 <puts@plt>
+     ad5:	48 8d 3d bd 0b 00 00 	lea    0xbbd(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     adc:	e8 6f fa ff ff       	callq  550 <puts@plt>
+     ae1:	8b 15 35 25 20 00    	mov    0x202535(%rip),%edx        # 20301c <op2_32u1>
+     ae7:	8b 05 2b 25 20 00    	mov    0x20252b(%rip),%eax        # 203018 <op1_32u1>
+     aed:	89 c6                	mov    %eax,%esi
+     aef:	48 8d 3d ca 0b 00 00 	lea    0xbca(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     af6:	b8 00 00 00 00       	mov    $0x0,%eax
+     afb:	e8 60 fa ff ff       	callq  560 <printf@plt>
+     b00:	8b 15 16 25 20 00    	mov    0x202516(%rip),%edx        # 20301c <op2_32u1>
+     b06:	8b 05 0c 25 20 00    	mov    0x20250c(%rip),%eax        # 203018 <op1_32u1>
+     b0c:	89 d6                	mov    %edx,%esi
+     b0e:	89 c7                	mov    %eax,%edi
+     b10:	e8 36 09 00 00       	callq  144b <_Z10_mps32_xorjj>
+     b15:	89 05 11 25 20 00    	mov    %eax,0x202511(%rip)        # 20302c <ret32u1>
+     b1b:	8b 05 0b 25 20 00    	mov    0x20250b(%rip),%eax        # 20302c <ret32u1>
+     b21:	89 c6                	mov    %eax,%esi
+     b23:	48 8d 3d 49 0d 00 00 	lea    0xd49(%rip),%rdi        # 1873 <_ZStL19piecewise_construct+0x1db>
+     b2a:	b8 00 00 00 00       	mov    $0x0,%eax
+     b2f:	e8 2c fa ff ff       	callq  560 <printf@plt>
+     b34:	48 8d 3d 5e 0b 00 00 	lea    0xb5e(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     b3b:	e8 10 fa ff ff       	callq  550 <puts@plt>
+     b40:	48 8d 3d 46 0d 00 00 	lea    0xd46(%rip),%rdi        # 188d <_ZStL19piecewise_construct+0x1f5>
+     b47:	e8 04 fa ff ff       	callq  550 <puts@plt>
+     b4c:	48 8d 3d 46 0b 00 00 	lea    0xb46(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     b53:	e8 f8 f9 ff ff       	callq  550 <puts@plt>
+     b58:	8b 15 be 24 20 00    	mov    0x2024be(%rip),%edx        # 20301c <op2_32u1>
+     b5e:	8b 05 b4 24 20 00    	mov    0x2024b4(%rip),%eax        # 203018 <op1_32u1>
+     b64:	89 c6                	mov    %eax,%esi
+     b66:	48 8d 3d 53 0b 00 00 	lea    0xb53(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     b6d:	b8 00 00 00 00       	mov    $0x0,%eax
+     b72:	e8 e9 f9 ff ff       	callq  560 <printf@plt>
+     b77:	8b 15 9f 24 20 00    	mov    0x20249f(%rip),%edx        # 20301c <op2_32u1>
+     b7d:	8b 05 95 24 20 00    	mov    0x202495(%rip),%eax        # 203018 <op1_32u1>
+     b83:	89 d6                	mov    %edx,%esi
+     b85:	89 c7                	mov    %eax,%edi
+     b87:	e8 d1 08 00 00       	callq  145d <_Z11_mps32_andijj>
+     b8c:	89 05 9a 24 20 00    	mov    %eax,0x20249a(%rip)        # 20302c <ret32u1>
+     b92:	8b 05 94 24 20 00    	mov    0x202494(%rip),%eax        # 20302c <ret32u1>
+     b98:	89 c6                	mov    %eax,%esi
+     b9a:	48 8d 3d fe 0c 00 00 	lea    0xcfe(%rip),%rdi        # 189f <_ZStL19piecewise_construct+0x207>
+     ba1:	b8 00 00 00 00       	mov    $0x0,%eax
+     ba6:	e8 b5 f9 ff ff       	callq  560 <printf@plt>
+     bab:	48 8d 3d e7 0a 00 00 	lea    0xae7(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     bb2:	e8 99 f9 ff ff       	callq  550 <puts@plt>
+     bb7:	48 8d 3d fc 0c 00 00 	lea    0xcfc(%rip),%rdi        # 18ba <_ZStL19piecewise_construct+0x222>
+     bbe:	e8 8d f9 ff ff       	callq  550 <puts@plt>
+     bc3:	48 8d 3d cf 0a 00 00 	lea    0xacf(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     bca:	e8 81 f9 ff ff       	callq  550 <puts@plt>
+     bcf:	8b 15 47 24 20 00    	mov    0x202447(%rip),%edx        # 20301c <op2_32u1>
+     bd5:	8b 05 3d 24 20 00    	mov    0x20243d(%rip),%eax        # 203018 <op1_32u1>
+     bdb:	89 c6                	mov    %eax,%esi
+     bdd:	48 8d 3d dc 0a 00 00 	lea    0xadc(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     be4:	b8 00 00 00 00       	mov    $0x0,%eax
+     be9:	e8 72 f9 ff ff       	callq  560 <printf@plt>
+     bee:	8b 15 28 24 20 00    	mov    0x202428(%rip),%edx        # 20301c <op2_32u1>
+     bf4:	8b 05 1e 24 20 00    	mov    0x20241e(%rip),%eax        # 203018 <op1_32u1>
+     bfa:	89 d6                	mov    %edx,%esi
+     bfc:	89 c7                	mov    %eax,%edi
+     bfe:	e8 6c 08 00 00       	callq  146f <_Z10_mps32_orijj>
+     c03:	89 05 23 24 20 00    	mov    %eax,0x202423(%rip)        # 20302c <ret32u1>
+     c09:	8b 05 1d 24 20 00    	mov    0x20241d(%rip),%eax        # 20302c <ret32u1>
+     c0f:	89 c6                	mov    %eax,%esi
+     c11:	48 8d 3d b4 0c 00 00 	lea    0xcb4(%rip),%rdi        # 18cc <_ZStL19piecewise_construct+0x234>
+     c18:	b8 00 00 00 00       	mov    $0x0,%eax
+     c1d:	e8 3e f9 ff ff       	callq  560 <printf@plt>
+     c22:	48 8d 3d 70 0a 00 00 	lea    0xa70(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     c29:	e8 22 f9 ff ff       	callq  550 <puts@plt>
+     c2e:	48 8d 3d b1 0c 00 00 	lea    0xcb1(%rip),%rdi        # 18e6 <_ZStL19piecewise_construct+0x24e>
+     c35:	e8 16 f9 ff ff       	callq  550 <puts@plt>
+     c3a:	48 8d 3d 58 0a 00 00 	lea    0xa58(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     c41:	e8 0a f9 ff ff       	callq  550 <puts@plt>
+     c46:	8b 15 d0 23 20 00    	mov    0x2023d0(%rip),%edx        # 20301c <op2_32u1>
+     c4c:	8b 05 c6 23 20 00    	mov    0x2023c6(%rip),%eax        # 203018 <op1_32u1>
+     c52:	89 c6                	mov    %eax,%esi
+     c54:	48 8d 3d 65 0a 00 00 	lea    0xa65(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     c5b:	b8 00 00 00 00       	mov    $0x0,%eax
+     c60:	e8 fb f8 ff ff       	callq  560 <printf@plt>
+     c65:	8b 15 b1 23 20 00    	mov    0x2023b1(%rip),%edx        # 20301c <op2_32u1>
+     c6b:	8b 05 a7 23 20 00    	mov    0x2023a7(%rip),%eax        # 203018 <op1_32u1>
+     c71:	89 d6                	mov    %edx,%esi
+     c73:	89 c7                	mov    %eax,%edi
+     c75:	e8 07 08 00 00       	callq  1481 <_Z11_mps32_xorijj>
+     c7a:	89 05 ac 23 20 00    	mov    %eax,0x2023ac(%rip)        # 20302c <ret32u1>
+     c80:	8b 05 a6 23 20 00    	mov    0x2023a6(%rip),%eax        # 20302c <ret32u1>
+     c86:	89 c6                	mov    %eax,%esi
+     c88:	48 8d 3d 69 0c 00 00 	lea    0xc69(%rip),%rdi        # 18f8 <_ZStL19piecewise_construct+0x260>
+     c8f:	b8 00 00 00 00       	mov    $0x0,%eax
+     c94:	e8 c7 f8 ff ff       	callq  560 <printf@plt>
+     c99:	48 8d 3d f9 09 00 00 	lea    0x9f9(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     ca0:	e8 ab f8 ff ff       	callq  550 <puts@plt>
+     ca5:	48 8d 3d 67 0c 00 00 	lea    0xc67(%rip),%rdi        # 1913 <_ZStL19piecewise_construct+0x27b>
+     cac:	e8 9f f8 ff ff       	callq  550 <puts@plt>
+     cb1:	48 8d 3d e1 09 00 00 	lea    0x9e1(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     cb8:	e8 93 f8 ff ff       	callq  550 <puts@plt>
+     cbd:	8b 15 51 23 20 00    	mov    0x202351(%rip),%edx        # 203014 <op2_32s1>
+     cc3:	8b 05 47 23 20 00    	mov    0x202347(%rip),%eax        # 203010 <op1_32s1>
+     cc9:	89 c6                	mov    %eax,%esi
+     ccb:	48 8d 3d ee 09 00 00 	lea    0x9ee(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     cd2:	b8 00 00 00 00       	mov    $0x0,%eax
+     cd7:	e8 84 f8 ff ff       	callq  560 <printf@plt>
+     cdc:	8b 15 32 23 20 00    	mov    0x202332(%rip),%edx        # 203014 <op2_32s1>
+     ce2:	8b 05 28 23 20 00    	mov    0x202328(%rip),%eax        # 203010 <op1_32s1>
+     ce8:	89 d6                	mov    %edx,%esi
+     cea:	89 c7                	mov    %eax,%edi
+     cec:	e8 a2 07 00 00       	callq  1493 <_Z10_mps32_sltii>
+     cf1:	89 05 31 23 20 00    	mov    %eax,0x202331(%rip)        # 203028 <ret32s1>
+     cf7:	8b 05 2b 23 20 00    	mov    0x20232b(%rip),%eax        # 203028 <ret32s1>
+     cfd:	89 c6                	mov    %eax,%esi
+     cff:	48 8d 3d 1f 0c 00 00 	lea    0xc1f(%rip),%rdi        # 1925 <_ZStL19piecewise_construct+0x28d>
+     d06:	b8 00 00 00 00       	mov    $0x0,%eax
+     d0b:	e8 50 f8 ff ff       	callq  560 <printf@plt>
+     d10:	48 8d 3d 82 09 00 00 	lea    0x982(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     d17:	e8 34 f8 ff ff       	callq  550 <puts@plt>
+     d1c:	48 8d 3d 1c 0c 00 00 	lea    0xc1c(%rip),%rdi        # 193f <_ZStL19piecewise_construct+0x2a7>
+     d23:	e8 28 f8 ff ff       	callq  550 <puts@plt>
+     d28:	48 8d 3d 6a 09 00 00 	lea    0x96a(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     d2f:	e8 1c f8 ff ff       	callq  550 <puts@plt>
+     d34:	8b 15 e2 22 20 00    	mov    0x2022e2(%rip),%edx        # 20301c <op2_32u1>
+     d3a:	8b 05 d8 22 20 00    	mov    0x2022d8(%rip),%eax        # 203018 <op1_32u1>
+     d40:	89 c6                	mov    %eax,%esi
+     d42:	48 8d 3d 77 09 00 00 	lea    0x977(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     d49:	b8 00 00 00 00       	mov    $0x0,%eax
+     d4e:	e8 0d f8 ff ff       	callq  560 <printf@plt>
+     d53:	8b 15 c3 22 20 00    	mov    0x2022c3(%rip),%edx        # 20301c <op2_32u1>
+     d59:	8b 05 b9 22 20 00    	mov    0x2022b9(%rip),%eax        # 203018 <op1_32u1>
+     d5f:	89 d6                	mov    %edx,%esi
+     d61:	89 c7                	mov    %eax,%edi
+     d63:	e8 4b 07 00 00       	callq  14b3 <_Z11_mps32_sltujj>
+     d68:	89 05 be 22 20 00    	mov    %eax,0x2022be(%rip)        # 20302c <ret32u1>
+     d6e:	8b 05 b8 22 20 00    	mov    0x2022b8(%rip),%eax        # 20302c <ret32u1>
+     d74:	89 c6                	mov    %eax,%esi
+     d76:	48 8d 3d d4 0b 00 00 	lea    0xbd4(%rip),%rdi        # 1951 <_ZStL19piecewise_construct+0x2b9>
+     d7d:	b8 00 00 00 00       	mov    $0x0,%eax
+     d82:	e8 d9 f7 ff ff       	callq  560 <printf@plt>
+     d87:	48 8d 3d 0b 09 00 00 	lea    0x90b(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     d8e:	e8 bd f7 ff ff       	callq  550 <puts@plt>
+     d93:	48 8d 3d d2 0b 00 00 	lea    0xbd2(%rip),%rdi        # 196c <_ZStL19piecewise_construct+0x2d4>
+     d9a:	e8 b1 f7 ff ff       	callq  550 <puts@plt>
+     d9f:	48 8d 3d f3 08 00 00 	lea    0x8f3(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     da6:	e8 a5 f7 ff ff       	callq  550 <puts@plt>
+     dab:	8b 15 63 22 20 00    	mov    0x202263(%rip),%edx        # 203014 <op2_32s1>
+     db1:	8b 05 59 22 20 00    	mov    0x202259(%rip),%eax        # 203010 <op1_32s1>
+     db7:	89 c6                	mov    %eax,%esi
+     db9:	48 8d 3d 00 09 00 00 	lea    0x900(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     dc0:	b8 00 00 00 00       	mov    $0x0,%eax
+     dc5:	e8 96 f7 ff ff       	callq  560 <printf@plt>
+     dca:	8b 15 44 22 20 00    	mov    0x202244(%rip),%edx        # 203014 <op2_32s1>
+     dd0:	8b 05 3a 22 20 00    	mov    0x20223a(%rip),%eax        # 203010 <op1_32s1>
+     dd6:	89 d6                	mov    %edx,%esi
+     dd8:	89 c7                	mov    %eax,%edi
+     dda:	e8 f4 06 00 00       	callq  14d3 <_Z11_mps32_sltiii>
+     ddf:	89 05 43 22 20 00    	mov    %eax,0x202243(%rip)        # 203028 <ret32s1>
+     de5:	8b 05 3d 22 20 00    	mov    0x20223d(%rip),%eax        # 203028 <ret32s1>
+     deb:	89 c6                	mov    %eax,%esi
+     ded:	48 8d 3d 8a 0b 00 00 	lea    0xb8a(%rip),%rdi        # 197e <_ZStL19piecewise_construct+0x2e6>
+     df4:	b8 00 00 00 00       	mov    $0x0,%eax
+     df9:	e8 62 f7 ff ff       	callq  560 <printf@plt>
+     dfe:	48 8d 3d 94 08 00 00 	lea    0x894(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     e05:	e8 46 f7 ff ff       	callq  550 <puts@plt>
+     e0a:	48 8d 3d 88 0b 00 00 	lea    0xb88(%rip),%rdi        # 1999 <_ZStL19piecewise_construct+0x301>
+     e11:	e8 3a f7 ff ff       	callq  550 <puts@plt>
+     e16:	48 8d 3d 7c 08 00 00 	lea    0x87c(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     e1d:	e8 2e f7 ff ff       	callq  550 <puts@plt>
+     e22:	8b 15 f4 21 20 00    	mov    0x2021f4(%rip),%edx        # 20301c <op2_32u1>
+     e28:	8b 05 ea 21 20 00    	mov    0x2021ea(%rip),%eax        # 203018 <op1_32u1>
+     e2e:	89 c6                	mov    %eax,%esi
+     e30:	48 8d 3d 89 08 00 00 	lea    0x889(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     e37:	b8 00 00 00 00       	mov    $0x0,%eax
+     e3c:	e8 1f f7 ff ff       	callq  560 <printf@plt>
+     e41:	8b 15 d5 21 20 00    	mov    0x2021d5(%rip),%edx        # 20301c <op2_32u1>
+     e47:	8b 05 cb 21 20 00    	mov    0x2021cb(%rip),%eax        # 203018 <op1_32u1>
+     e4d:	89 d6                	mov    %edx,%esi
+     e4f:	89 c7                	mov    %eax,%edi
+     e51:	e8 9d 06 00 00       	callq  14f3 <_Z12_mps32_sltiujj>
+     e56:	89 05 d0 21 20 00    	mov    %eax,0x2021d0(%rip)        # 20302c <ret32u1>
+     e5c:	8b 05 ca 21 20 00    	mov    0x2021ca(%rip),%eax        # 20302c <ret32u1>
+     e62:	89 c6                	mov    %eax,%esi
+     e64:	48 8d 3d 40 0b 00 00 	lea    0xb40(%rip),%rdi        # 19ab <_ZStL19piecewise_construct+0x313>
+     e6b:	b8 00 00 00 00       	mov    $0x0,%eax
+     e70:	e8 eb f6 ff ff       	callq  560 <printf@plt>
+     e75:	48 8d 3d 1d 08 00 00 	lea    0x81d(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     e7c:	e8 cf f6 ff ff       	callq  550 <puts@plt>
+     e81:	48 8d 3d 3f 0b 00 00 	lea    0xb3f(%rip),%rdi        # 19c7 <_ZStL19piecewise_construct+0x32f>
+     e88:	e8 c3 f6 ff ff       	callq  550 <puts@plt>
+     e8d:	48 8d 3d 05 08 00 00 	lea    0x805(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     e94:	e8 b7 f6 ff ff       	callq  550 <puts@plt>
+     e99:	8b 15 7d 21 20 00    	mov    0x20217d(%rip),%edx        # 20301c <op2_32u1>
+     e9f:	8b 05 73 21 20 00    	mov    0x202173(%rip),%eax        # 203018 <op1_32u1>
+     ea5:	89 c6                	mov    %eax,%esi
+     ea7:	48 8d 3d 12 08 00 00 	lea    0x812(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     eae:	b8 00 00 00 00       	mov    $0x0,%eax
+     eb3:	e8 a8 f6 ff ff       	callq  560 <printf@plt>
+     eb8:	8b 15 5e 21 20 00    	mov    0x20215e(%rip),%edx        # 20301c <op2_32u1>
+     ebe:	8b 05 54 21 20 00    	mov    0x202154(%rip),%eax        # 203018 <op1_32u1>
+     ec4:	89 d6                	mov    %edx,%esi
+     ec6:	89 c7                	mov    %eax,%edi
+     ec8:	e8 46 06 00 00       	callq  1513 <_Z10_mps32_slljj>
+     ecd:	89 05 59 21 20 00    	mov    %eax,0x202159(%rip)        # 20302c <ret32u1>
+     ed3:	8b 05 53 21 20 00    	mov    0x202153(%rip),%eax        # 20302c <ret32u1>
+     ed9:	89 c6                	mov    %eax,%esi
+     edb:	48 8d 3d f7 0a 00 00 	lea    0xaf7(%rip),%rdi        # 19d9 <_ZStL19piecewise_construct+0x341>
+     ee2:	b8 00 00 00 00       	mov    $0x0,%eax
+     ee7:	e8 74 f6 ff ff       	callq  560 <printf@plt>
+     eec:	48 8d 3d a6 07 00 00 	lea    0x7a6(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     ef3:	e8 58 f6 ff ff       	callq  550 <puts@plt>
+     ef8:	48 8d 3d f4 0a 00 00 	lea    0xaf4(%rip),%rdi        # 19f3 <_ZStL19piecewise_construct+0x35b>
+     eff:	e8 4c f6 ff ff       	callq  550 <puts@plt>
+     f04:	48 8d 3d 8e 07 00 00 	lea    0x78e(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     f0b:	e8 40 f6 ff ff       	callq  550 <puts@plt>
+     f10:	8b 15 06 21 20 00    	mov    0x202106(%rip),%edx        # 20301c <op2_32u1>
+     f16:	8b 05 fc 20 20 00    	mov    0x2020fc(%rip),%eax        # 203018 <op1_32u1>
+     f1c:	89 c6                	mov    %eax,%esi
+     f1e:	48 8d 3d 9b 07 00 00 	lea    0x79b(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     f25:	b8 00 00 00 00       	mov    $0x0,%eax
+     f2a:	e8 31 f6 ff ff       	callq  560 <printf@plt>
+     f2f:	8b 15 e7 20 20 00    	mov    0x2020e7(%rip),%edx        # 20301c <op2_32u1>
+     f35:	8b 05 dd 20 20 00    	mov    0x2020dd(%rip),%eax        # 203018 <op1_32u1>
+     f3b:	89 d6                	mov    %edx,%esi
+     f3d:	89 c7                	mov    %eax,%edi
+     f3f:	e8 e7 05 00 00       	callq  152b <_Z10_mps32_srljj>
+     f44:	89 05 e2 20 20 00    	mov    %eax,0x2020e2(%rip)        # 20302c <ret32u1>
+     f4a:	8b 05 dc 20 20 00    	mov    0x2020dc(%rip),%eax        # 20302c <ret32u1>
+     f50:	89 c6                	mov    %eax,%esi
+     f52:	48 8d 3d ac 0a 00 00 	lea    0xaac(%rip),%rdi        # 1a05 <_ZStL19piecewise_construct+0x36d>
+     f59:	b8 00 00 00 00       	mov    $0x0,%eax
+     f5e:	e8 fd f5 ff ff       	callq  560 <printf@plt>
+     f63:	48 8d 3d 2f 07 00 00 	lea    0x72f(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     f6a:	e8 e1 f5 ff ff       	callq  550 <puts@plt>
+     f6f:	48 8d 3d a9 0a 00 00 	lea    0xaa9(%rip),%rdi        # 1a1f <_ZStL19piecewise_construct+0x387>
+     f76:	e8 d5 f5 ff ff       	callq  550 <puts@plt>
+     f7b:	48 8d 3d 17 07 00 00 	lea    0x717(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     f82:	e8 c9 f5 ff ff       	callq  550 <puts@plt>
+     f87:	8b 15 87 20 20 00    	mov    0x202087(%rip),%edx        # 203014 <op2_32s1>
+     f8d:	8b 05 7d 20 20 00    	mov    0x20207d(%rip),%eax        # 203010 <op1_32s1>
+     f93:	89 c6                	mov    %eax,%esi
+     f95:	48 8d 3d 24 07 00 00 	lea    0x724(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+     f9c:	b8 00 00 00 00       	mov    $0x0,%eax
+     fa1:	e8 ba f5 ff ff       	callq  560 <printf@plt>
+     fa6:	8b 15 68 20 20 00    	mov    0x202068(%rip),%edx        # 203014 <op2_32s1>
+     fac:	8b 05 5e 20 20 00    	mov    0x20205e(%rip),%eax        # 203010 <op1_32s1>
+     fb2:	89 d6                	mov    %edx,%esi
+     fb4:	89 c7                	mov    %eax,%edi
+     fb6:	e8 88 05 00 00       	callq  1543 <_Z10_mps32_sraii>
+     fbb:	89 05 67 20 20 00    	mov    %eax,0x202067(%rip)        # 203028 <ret32s1>
+     fc1:	8b 05 61 20 20 00    	mov    0x202061(%rip),%eax        # 203028 <ret32s1>
+     fc7:	89 c6                	mov    %eax,%esi
+     fc9:	48 8d 3d 61 0a 00 00 	lea    0xa61(%rip),%rdi        # 1a31 <_ZStL19piecewise_construct+0x399>
+     fd0:	b8 00 00 00 00       	mov    $0x0,%eax
+     fd5:	e8 86 f5 ff ff       	callq  560 <printf@plt>
+     fda:	48 8d 3d b8 06 00 00 	lea    0x6b8(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     fe1:	e8 6a f5 ff ff       	callq  550 <puts@plt>
+     fe6:	48 8d 3d 5e 0a 00 00 	lea    0xa5e(%rip),%rdi        # 1a4b <_ZStL19piecewise_construct+0x3b3>
+     fed:	e8 5e f5 ff ff       	callq  550 <puts@plt>
+     ff2:	48 8d 3d a0 06 00 00 	lea    0x6a0(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+     ff9:	e8 52 f5 ff ff       	callq  550 <puts@plt>
+     ffe:	8b 15 10 20 20 00    	mov    0x202010(%rip),%edx        # 203014 <op2_32s1>
+    1004:	8b 05 06 20 20 00    	mov    0x202006(%rip),%eax        # 203010 <op1_32s1>
+    100a:	89 c6                	mov    %eax,%esi
+    100c:	48 8d 3d ad 06 00 00 	lea    0x6ad(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    1013:	b8 00 00 00 00       	mov    $0x0,%eax
+    1018:	e8 43 f5 ff ff       	callq  560 <printf@plt>
+    101d:	8b 15 f1 1f 20 00    	mov    0x201ff1(%rip),%edx        # 203014 <op2_32s1>
+    1023:	8b 05 e7 1f 20 00    	mov    0x201fe7(%rip),%eax        # 203010 <op1_32s1>
+    1029:	89 d6                	mov    %edx,%esi
+    102b:	89 c7                	mov    %eax,%edi
+    102d:	e8 29 05 00 00       	callq  155b <_Z10_mps32_divii>
+    1032:	89 05 f0 1f 20 00    	mov    %eax,0x201ff0(%rip)        # 203028 <ret32s1>
+    1038:	8b 05 ea 1f 20 00    	mov    0x201fea(%rip),%eax        # 203028 <ret32s1>
+    103e:	89 c6                	mov    %eax,%esi
+    1040:	48 8d 3d 16 0a 00 00 	lea    0xa16(%rip),%rdi        # 1a5d <_ZStL19piecewise_construct+0x3c5>
+    1047:	b8 00 00 00 00       	mov    $0x0,%eax
+    104c:	e8 0f f5 ff ff       	callq  560 <printf@plt>
+    1051:	48 8d 3d 41 06 00 00 	lea    0x641(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    1058:	e8 f3 f4 ff ff       	callq  550 <puts@plt>
+    105d:	48 8d 3d 13 0a 00 00 	lea    0xa13(%rip),%rdi        # 1a77 <_ZStL19piecewise_construct+0x3df>
+    1064:	e8 e7 f4 ff ff       	callq  550 <puts@plt>
+    1069:	48 8d 3d 29 06 00 00 	lea    0x629(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    1070:	e8 db f4 ff ff       	callq  550 <puts@plt>
+    1075:	8b 15 a1 1f 20 00    	mov    0x201fa1(%rip),%edx        # 20301c <op2_32u1>
+    107b:	8b 05 97 1f 20 00    	mov    0x201f97(%rip),%eax        # 203018 <op1_32u1>
+    1081:	89 c6                	mov    %eax,%esi
+    1083:	48 8d 3d 36 06 00 00 	lea    0x636(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    108a:	b8 00 00 00 00       	mov    $0x0,%eax
+    108f:	e8 cc f4 ff ff       	callq  560 <printf@plt>
+    1094:	8b 15 82 1f 20 00    	mov    0x201f82(%rip),%edx        # 20301c <op2_32u1>
+    109a:	8b 05 78 1f 20 00    	mov    0x201f78(%rip),%eax        # 203018 <op1_32u1>
+    10a0:	89 d6                	mov    %edx,%esi
+    10a2:	89 c7                	mov    %eax,%edi
+    10a4:	e8 c5 04 00 00       	callq  156e <_Z11_mps32_divujj>
+    10a9:	89 05 7d 1f 20 00    	mov    %eax,0x201f7d(%rip)        # 20302c <ret32u1>
+    10af:	8b 05 77 1f 20 00    	mov    0x201f77(%rip),%eax        # 20302c <ret32u1>
+    10b5:	89 c6                	mov    %eax,%esi
+    10b7:	48 8d 3d cb 09 00 00 	lea    0x9cb(%rip),%rdi        # 1a89 <_ZStL19piecewise_construct+0x3f1>
+    10be:	b8 00 00 00 00       	mov    $0x0,%eax
+    10c3:	e8 98 f4 ff ff       	callq  560 <printf@plt>
+    10c8:	48 8d 3d ca 05 00 00 	lea    0x5ca(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    10cf:	e8 7c f4 ff ff       	callq  550 <puts@plt>
+    10d4:	48 8d 3d c9 09 00 00 	lea    0x9c9(%rip),%rdi        # 1aa4 <_ZStL19piecewise_construct+0x40c>
+    10db:	e8 70 f4 ff ff       	callq  550 <puts@plt>
+    10e0:	48 8d 3d b2 05 00 00 	lea    0x5b2(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    10e7:	e8 64 f4 ff ff       	callq  550 <puts@plt>
+    10ec:	8b 15 22 1f 20 00    	mov    0x201f22(%rip),%edx        # 203014 <op2_32s1>
+    10f2:	8b 05 18 1f 20 00    	mov    0x201f18(%rip),%eax        # 203010 <op1_32s1>
+    10f8:	89 c6                	mov    %eax,%esi
+    10fa:	48 8d 3d bf 05 00 00 	lea    0x5bf(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    1101:	b8 00 00 00 00       	mov    $0x0,%eax
+    1106:	e8 55 f4 ff ff       	callq  560 <printf@plt>
+    110b:	8b 15 03 1f 20 00    	mov    0x201f03(%rip),%edx        # 203014 <op2_32s1>
+    1111:	8b 05 f9 1e 20 00    	mov    0x201ef9(%rip),%eax        # 203010 <op1_32s1>
+    1117:	89 d6                	mov    %edx,%esi
+    1119:	89 c7                	mov    %eax,%edi
+    111b:	e8 65 04 00 00       	callq  1585 <_Z10_mps32_modii>
+    1120:	89 05 02 1f 20 00    	mov    %eax,0x201f02(%rip)        # 203028 <ret32s1>
+    1126:	8b 05 fc 1e 20 00    	mov    0x201efc(%rip),%eax        # 203028 <ret32s1>
+    112c:	89 c6                	mov    %eax,%esi
+    112e:	48 8d 3d 81 09 00 00 	lea    0x981(%rip),%rdi        # 1ab6 <_ZStL19piecewise_construct+0x41e>
+    1135:	b8 00 00 00 00       	mov    $0x0,%eax
+    113a:	e8 21 f4 ff ff       	callq  560 <printf@plt>
+    113f:	48 8d 3d 53 05 00 00 	lea    0x553(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    1146:	e8 05 f4 ff ff       	callq  550 <puts@plt>
+    114b:	48 8d 3d 7e 09 00 00 	lea    0x97e(%rip),%rdi        # 1ad0 <_ZStL19piecewise_construct+0x438>
+    1152:	e8 f9 f3 ff ff       	callq  550 <puts@plt>
+    1157:	48 8d 3d 3b 05 00 00 	lea    0x53b(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    115e:	e8 ed f3 ff ff       	callq  550 <puts@plt>
+    1163:	8b 15 b3 1e 20 00    	mov    0x201eb3(%rip),%edx        # 20301c <op2_32u1>
+    1169:	8b 05 a9 1e 20 00    	mov    0x201ea9(%rip),%eax        # 203018 <op1_32u1>
+    116f:	89 c6                	mov    %eax,%esi
+    1171:	48 8d 3d 48 05 00 00 	lea    0x548(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    1178:	b8 00 00 00 00       	mov    $0x0,%eax
+    117d:	e8 de f3 ff ff       	callq  560 <printf@plt>
+    1182:	8b 15 94 1e 20 00    	mov    0x201e94(%rip),%edx        # 20301c <op2_32u1>
+    1188:	8b 05 8a 1e 20 00    	mov    0x201e8a(%rip),%eax        # 203018 <op1_32u1>
+    118e:	89 d6                	mov    %edx,%esi
+    1190:	89 c7                	mov    %eax,%edi
+    1192:	e8 03 04 00 00       	callq  159a <_Z11_mps32_modujj>
+    1197:	89 05 8f 1e 20 00    	mov    %eax,0x201e8f(%rip)        # 20302c <ret32u1>
+    119d:	8b 05 89 1e 20 00    	mov    0x201e89(%rip),%eax        # 20302c <ret32u1>
+    11a3:	89 c6                	mov    %eax,%esi
+    11a5:	48 8d 3d 36 09 00 00 	lea    0x936(%rip),%rdi        # 1ae2 <_ZStL19piecewise_construct+0x44a>
+    11ac:	b8 00 00 00 00       	mov    $0x0,%eax
+    11b1:	e8 aa f3 ff ff       	callq  560 <printf@plt>
+    11b6:	48 8d 3d dc 04 00 00 	lea    0x4dc(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    11bd:	e8 8e f3 ff ff       	callq  550 <puts@plt>
+    11c2:	48 8d 3d 34 09 00 00 	lea    0x934(%rip),%rdi        # 1afd <_ZStL19piecewise_construct+0x465>
+    11c9:	e8 82 f3 ff ff       	callq  550 <puts@plt>
+    11ce:	48 8d 3d c4 04 00 00 	lea    0x4c4(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    11d5:	e8 76 f3 ff ff       	callq  550 <puts@plt>
+    11da:	8b 15 34 1e 20 00    	mov    0x201e34(%rip),%edx        # 203014 <op2_32s1>
+    11e0:	8b 05 2a 1e 20 00    	mov    0x201e2a(%rip),%eax        # 203010 <op1_32s1>
+    11e6:	89 c6                	mov    %eax,%esi
+    11e8:	48 8d 3d d1 04 00 00 	lea    0x4d1(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    11ef:	b8 00 00 00 00       	mov    $0x0,%eax
+    11f4:	e8 67 f3 ff ff       	callq  560 <printf@plt>
+    11f9:	8b 15 15 1e 20 00    	mov    0x201e15(%rip),%edx        # 203014 <op2_32s1>
+    11ff:	8b 05 0b 1e 20 00    	mov    0x201e0b(%rip),%eax        # 203010 <op1_32s1>
+    1205:	89 d6                	mov    %edx,%esi
+    1207:	89 c7                	mov    %eax,%edi
+    1209:	e8 a5 03 00 00       	callq  15b3 <_Z11_mps32_multii>
+    120e:	89 05 14 1e 20 00    	mov    %eax,0x201e14(%rip)        # 203028 <ret32s1>
+    1214:	8b 05 0e 1e 20 00    	mov    0x201e0e(%rip),%eax        # 203028 <ret32s1>
+    121a:	89 c6                	mov    %eax,%esi
+    121c:	48 8d 3d ec 08 00 00 	lea    0x8ec(%rip),%rdi        # 1b0f <_ZStL19piecewise_construct+0x477>
+    1223:	b8 00 00 00 00       	mov    $0x0,%eax
+    1228:	e8 33 f3 ff ff       	callq  560 <printf@plt>
+    122d:	48 8d 3d 65 04 00 00 	lea    0x465(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    1234:	e8 17 f3 ff ff       	callq  550 <puts@plt>
+    1239:	48 8d 3d ea 08 00 00 	lea    0x8ea(%rip),%rdi        # 1b2a <_ZStL19piecewise_construct+0x492>
+    1240:	e8 0b f3 ff ff       	callq  550 <puts@plt>
+    1245:	48 8d 3d 4d 04 00 00 	lea    0x44d(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    124c:	e8 ff f2 ff ff       	callq  550 <puts@plt>
+    1251:	8b 15 c5 1d 20 00    	mov    0x201dc5(%rip),%edx        # 20301c <op2_32u1>
+    1257:	8b 05 bb 1d 20 00    	mov    0x201dbb(%rip),%eax        # 203018 <op1_32u1>
+    125d:	89 c6                	mov    %eax,%esi
+    125f:	48 8d 3d 5a 04 00 00 	lea    0x45a(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    1266:	b8 00 00 00 00       	mov    $0x0,%eax
+    126b:	e8 f0 f2 ff ff       	callq  560 <printf@plt>
+    1270:	8b 15 a6 1d 20 00    	mov    0x201da6(%rip),%edx        # 20301c <op2_32u1>
+    1276:	8b 05 9c 1d 20 00    	mov    0x201d9c(%rip),%eax        # 203018 <op1_32u1>
+    127c:	89 d6                	mov    %edx,%esi
+    127e:	89 c7                	mov    %eax,%edi
+    1280:	e8 41 03 00 00       	callq  15c6 <_Z12_mps32_multujj>
+    1285:	89 05 a1 1d 20 00    	mov    %eax,0x201da1(%rip)        # 20302c <ret32u1>
+    128b:	8b 05 9b 1d 20 00    	mov    0x201d9b(%rip),%eax        # 20302c <ret32u1>
+    1291:	89 c6                	mov    %eax,%esi
+    1293:	48 8d 3d a2 08 00 00 	lea    0x8a2(%rip),%rdi        # 1b3c <_ZStL19piecewise_construct+0x4a4>
+    129a:	b8 00 00 00 00       	mov    $0x0,%eax
+    129f:	e8 bc f2 ff ff       	callq  560 <printf@plt>
+    12a4:	48 8d 3d ee 03 00 00 	lea    0x3ee(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    12ab:	e8 a0 f2 ff ff       	callq  550 <puts@plt>
+    12b0:	48 8d 3d a1 08 00 00 	lea    0x8a1(%rip),%rdi        # 1b58 <_ZStL19piecewise_construct+0x4c0>
+    12b7:	e8 94 f2 ff ff       	callq  550 <puts@plt>
+    12bc:	48 8d 3d d6 03 00 00 	lea    0x3d6(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    12c3:	e8 88 f2 ff ff       	callq  550 <puts@plt>
+    12c8:	8b 15 46 1d 20 00    	mov    0x201d46(%rip),%edx        # 203014 <op2_32s1>
+    12ce:	8b 05 3c 1d 20 00    	mov    0x201d3c(%rip),%eax        # 203010 <op1_32s1>
+    12d4:	89 c6                	mov    %eax,%esi
+    12d6:	48 8d 3d e3 03 00 00 	lea    0x3e3(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    12dd:	b8 00 00 00 00       	mov    $0x0,%eax
+    12e2:	e8 79 f2 ff ff       	callq  560 <printf@plt>
+    12e7:	8b 15 27 1d 20 00    	mov    0x201d27(%rip),%edx        # 203014 <op2_32s1>
+    12ed:	8b 05 1d 1d 20 00    	mov    0x201d1d(%rip),%eax        # 203010 <op1_32s1>
+    12f3:	89 d6                	mov    %edx,%esi
+    12f5:	89 c7                	mov    %eax,%edi
+    12f7:	e8 dd 02 00 00       	callq  15d9 <_Z11_mps64_multii>
+    12fc:	48 89 05 2d 1d 20 00 	mov    %rax,0x201d2d(%rip)        # 203030 <ret64s1>
+    1303:	48 8b 05 26 1d 20 00 	mov    0x201d26(%rip),%rax        # 203030 <ret64s1>
+    130a:	48 89 c6             	mov    %rax,%rsi
+    130d:	48 8d 3d 56 08 00 00 	lea    0x856(%rip),%rdi        # 1b6a <_ZStL19piecewise_construct+0x4d2>
+    1314:	b8 00 00 00 00       	mov    $0x0,%eax
+    1319:	e8 42 f2 ff ff       	callq  560 <printf@plt>
+    131e:	48 8d 3d 74 03 00 00 	lea    0x374(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    1325:	e8 26 f2 ff ff       	callq  550 <puts@plt>
+    132a:	48 8d 3d 55 08 00 00 	lea    0x855(%rip),%rdi        # 1b86 <_ZStL19piecewise_construct+0x4ee>
+    1331:	e8 1a f2 ff ff       	callq  550 <puts@plt>
+    1336:	48 8d 3d 5c 03 00 00 	lea    0x35c(%rip),%rdi        # 1699 <_ZStL19piecewise_construct+0x1>
+    133d:	e8 0e f2 ff ff       	callq  550 <puts@plt>
+    1342:	8b 15 d4 1c 20 00    	mov    0x201cd4(%rip),%edx        # 20301c <op2_32u1>
+    1348:	8b 05 ca 1c 20 00    	mov    0x201cca(%rip),%eax        # 203018 <op1_32u1>
+    134e:	89 c6                	mov    %eax,%esi
+    1350:	48 8d 3d 69 03 00 00 	lea    0x369(%rip),%rdi        # 16c0 <_ZStL19piecewise_construct+0x28>
+    1357:	b8 00 00 00 00       	mov    $0x0,%eax
+    135c:	e8 ff f1 ff ff       	callq  560 <printf@plt>
+    1361:	8b 15 b5 1c 20 00    	mov    0x201cb5(%rip),%edx        # 20301c <op2_32u1>
+    1367:	8b 05 ab 1c 20 00    	mov    0x201cab(%rip),%eax        # 203018 <op1_32u1>
+    136d:	89 d6                	mov    %edx,%esi
+    136f:	89 c7                	mov    %eax,%edi
+    1371:	e8 7e 02 00 00       	callq  15f4 <_Z12_mps64_multujj>
+    1376:	48 89 05 bb 1c 20 00 	mov    %rax,0x201cbb(%rip)        # 203038 <ret64u1>
+    137d:	48 8b 05 b4 1c 20 00 	mov    0x201cb4(%rip),%rax        # 203038 <ret64u1>
+    1384:	48 89 c6             	mov    %rax,%rsi
+    1387:	48 8d 3d 0a 08 00 00 	lea    0x80a(%rip),%rdi        # 1b98 <_ZStL19piecewise_construct+0x500>
+    138e:	b8 00 00 00 00       	mov    $0x0,%eax
+    1393:	e8 c8 f1 ff ff       	callq  560 <printf@plt>
+    1398:	b8 00 00 00 00       	mov    $0x0,%eax
+    139d:	5d                   	pop    %rbp
+    139e:	c3                   	retq   
+
+000000000000139f <_Z10_mps32_addii>:
+    139f:	55                   	push   %rbp
+    13a0:	48 89 e5             	mov    %rsp,%rbp
+    13a3:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    13a6:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    13a9:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    13ac:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    13af:	01 d0                	add    %edx,%eax
+    13b1:	5d                   	pop    %rbp
+    13b2:	c3                   	retq   
+
+00000000000013b3 <_Z11_mps32_addujj>:
+    13b3:	55                   	push   %rbp
+    13b4:	48 89 e5             	mov    %rsp,%rbp
+    13b7:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    13ba:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    13bd:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    13c0:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    13c3:	01 d0                	add    %edx,%eax
+    13c5:	5d                   	pop    %rbp
+    13c6:	c3                   	retq   
+
+00000000000013c7 <_Z10_mps32_subii>:
+    13c7:	55                   	push   %rbp
+    13c8:	48 89 e5             	mov    %rsp,%rbp
+    13cb:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    13ce:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    13d1:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    13d4:	2b 45 f8             	sub    -0x8(%rbp),%eax
+    13d7:	5d                   	pop    %rbp
+    13d8:	c3                   	retq   
+
+00000000000013d9 <_Z11_mps32_subujj>:
+    13d9:	55                   	push   %rbp
+    13da:	48 89 e5             	mov    %rsp,%rbp
+    13dd:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    13e0:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    13e3:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    13e6:	2b 45 f8             	sub    -0x8(%rbp),%eax
+    13e9:	5d                   	pop    %rbp
+    13ea:	c3                   	retq   
+
+00000000000013eb <_Z11_mps32_addiii>:
+    13eb:	55                   	push   %rbp
+    13ec:	48 89 e5             	mov    %rsp,%rbp
+    13ef:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    13f2:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    13f5:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    13f8:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    13fb:	01 d0                	add    %edx,%eax
+    13fd:	5d                   	pop    %rbp
+    13fe:	c3                   	retq   
+
+00000000000013ff <_Z12_mps32_addiujj>:
+    13ff:	55                   	push   %rbp
+    1400:	48 89 e5             	mov    %rsp,%rbp
+    1403:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1406:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1409:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    140c:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    140f:	01 d0                	add    %edx,%eax
+    1411:	5d                   	pop    %rbp
+    1412:	c3                   	retq   
+
+0000000000001413 <_Z10_mps32_andjj>:
+    1413:	55                   	push   %rbp
+    1414:	48 89 e5             	mov    %rsp,%rbp
+    1417:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    141a:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    141d:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1420:	23 45 f8             	and    -0x8(%rbp),%eax
+    1423:	5d                   	pop    %rbp
+    1424:	c3                   	retq   
+
+0000000000001425 <_Z10_mps32_norjj>:
+    1425:	55                   	push   %rbp
+    1426:	48 89 e5             	mov    %rsp,%rbp
+    1429:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    142c:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    142f:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1432:	0b 45 f8             	or     -0x8(%rbp),%eax
+    1435:	f7 d0                	not    %eax
+    1437:	5d                   	pop    %rbp
+    1438:	c3                   	retq   
+
+0000000000001439 <_Z9_mps32_orjj>:
+    1439:	55                   	push   %rbp
+    143a:	48 89 e5             	mov    %rsp,%rbp
+    143d:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1440:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1443:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1446:	0b 45 f8             	or     -0x8(%rbp),%eax
+    1449:	5d                   	pop    %rbp
+    144a:	c3                   	retq   
+
+000000000000144b <_Z10_mps32_xorjj>:
+    144b:	55                   	push   %rbp
+    144c:	48 89 e5             	mov    %rsp,%rbp
+    144f:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1452:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1455:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1458:	33 45 f8             	xor    -0x8(%rbp),%eax
+    145b:	5d                   	pop    %rbp
+    145c:	c3                   	retq   
+
+000000000000145d <_Z11_mps32_andijj>:
+    145d:	55                   	push   %rbp
+    145e:	48 89 e5             	mov    %rsp,%rbp
+    1461:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1464:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1467:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    146a:	23 45 f8             	and    -0x8(%rbp),%eax
+    146d:	5d                   	pop    %rbp
+    146e:	c3                   	retq   
+
+000000000000146f <_Z10_mps32_orijj>:
+    146f:	55                   	push   %rbp
+    1470:	48 89 e5             	mov    %rsp,%rbp
+    1473:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1476:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1479:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    147c:	0b 45 f8             	or     -0x8(%rbp),%eax
+    147f:	5d                   	pop    %rbp
+    1480:	c3                   	retq   
+
+0000000000001481 <_Z11_mps32_xorijj>:
+    1481:	55                   	push   %rbp
+    1482:	48 89 e5             	mov    %rsp,%rbp
+    1485:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1488:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    148b:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    148e:	33 45 f8             	xor    -0x8(%rbp),%eax
+    1491:	5d                   	pop    %rbp
+    1492:	c3                   	retq   
+
+0000000000001493 <_Z10_mps32_sltii>:
+    1493:	55                   	push   %rbp
+    1494:	48 89 e5             	mov    %rsp,%rbp
+    1497:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    149a:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    149d:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    14a0:	3b 45 f8             	cmp    -0x8(%rbp),%eax
+    14a3:	7d 07                	jge    14ac <_Z10_mps32_sltii+0x19>
+    14a5:	b8 01 00 00 00       	mov    $0x1,%eax
+    14aa:	eb 05                	jmp    14b1 <_Z10_mps32_sltii+0x1e>
+    14ac:	b8 00 00 00 00       	mov    $0x0,%eax
+    14b1:	5d                   	pop    %rbp
+    14b2:	c3                   	retq   
+
+00000000000014b3 <_Z11_mps32_sltujj>:
+    14b3:	55                   	push   %rbp
+    14b4:	48 89 e5             	mov    %rsp,%rbp
+    14b7:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    14ba:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    14bd:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    14c0:	3b 45 f8             	cmp    -0x8(%rbp),%eax
+    14c3:	73 07                	jae    14cc <_Z11_mps32_sltujj+0x19>
+    14c5:	b8 01 00 00 00       	mov    $0x1,%eax
+    14ca:	eb 05                	jmp    14d1 <_Z11_mps32_sltujj+0x1e>
+    14cc:	b8 00 00 00 00       	mov    $0x0,%eax
+    14d1:	5d                   	pop    %rbp
+    14d2:	c3                   	retq   
+
+00000000000014d3 <_Z11_mps32_sltiii>:
+    14d3:	55                   	push   %rbp
+    14d4:	48 89 e5             	mov    %rsp,%rbp
+    14d7:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    14da:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    14dd:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    14e0:	3b 45 f8             	cmp    -0x8(%rbp),%eax
+    14e3:	7d 07                	jge    14ec <_Z11_mps32_sltiii+0x19>
+    14e5:	b8 01 00 00 00       	mov    $0x1,%eax
+    14ea:	eb 05                	jmp    14f1 <_Z11_mps32_sltiii+0x1e>
+    14ec:	b8 00 00 00 00       	mov    $0x0,%eax
+    14f1:	5d                   	pop    %rbp
+    14f2:	c3                   	retq   
+
+00000000000014f3 <_Z12_mps32_sltiujj>:
+    14f3:	55                   	push   %rbp
+    14f4:	48 89 e5             	mov    %rsp,%rbp
+    14f7:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    14fa:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    14fd:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1500:	3b 45 f8             	cmp    -0x8(%rbp),%eax
+    1503:	73 07                	jae    150c <_Z12_mps32_sltiujj+0x19>
+    1505:	b8 01 00 00 00       	mov    $0x1,%eax
+    150a:	eb 05                	jmp    1511 <_Z12_mps32_sltiujj+0x1e>
+    150c:	b8 00 00 00 00       	mov    $0x0,%eax
+    1511:	5d                   	pop    %rbp
+    1512:	c3                   	retq   
+
+0000000000001513 <_Z10_mps32_slljj>:
+    1513:	55                   	push   %rbp
+    1514:	48 89 e5             	mov    %rsp,%rbp
+    1517:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    151a:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    151d:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    1520:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    1523:	89 c1                	mov    %eax,%ecx
+    1525:	d3 e2                	shl    %cl,%edx
+    1527:	89 d0                	mov    %edx,%eax
+    1529:	5d                   	pop    %rbp
+    152a:	c3                   	retq   
+
+000000000000152b <_Z10_mps32_srljj>:
+    152b:	55                   	push   %rbp
+    152c:	48 89 e5             	mov    %rsp,%rbp
+    152f:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1532:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1535:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    1538:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    153b:	89 c1                	mov    %eax,%ecx
+    153d:	d3 ea                	shr    %cl,%edx
+    153f:	89 d0                	mov    %edx,%eax
+    1541:	5d                   	pop    %rbp
+    1542:	c3                   	retq   
+
+0000000000001543 <_Z10_mps32_sraii>:
+    1543:	55                   	push   %rbp
+    1544:	48 89 e5             	mov    %rsp,%rbp
+    1547:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    154a:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    154d:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    1550:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    1553:	89 c1                	mov    %eax,%ecx
+    1555:	d3 fa                	sar    %cl,%edx
+    1557:	89 d0                	mov    %edx,%eax
+    1559:	5d                   	pop    %rbp
+    155a:	c3                   	retq   
+
+000000000000155b <_Z10_mps32_divii>:
+    155b:	55                   	push   %rbp
+    155c:	48 89 e5             	mov    %rsp,%rbp
+    155f:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1562:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1565:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1568:	99                   	cltd   
+    1569:	f7 7d f8             	idivl  -0x8(%rbp)
+    156c:	5d                   	pop    %rbp
+    156d:	c3                   	retq   
+
+000000000000156e <_Z11_mps32_divujj>:
+    156e:	55                   	push   %rbp
+    156f:	48 89 e5             	mov    %rsp,%rbp
+    1572:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    1575:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    1578:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    157b:	ba 00 00 00 00       	mov    $0x0,%edx
+    1580:	f7 75 f8             	divl   -0x8(%rbp)
+    1583:	5d                   	pop    %rbp
+    1584:	c3                   	retq   
+
+0000000000001585 <_Z10_mps32_modii>:
+    1585:	55                   	push   %rbp
+    1586:	48 89 e5             	mov    %rsp,%rbp
+    1589:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    158c:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    158f:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1592:	99                   	cltd   
+    1593:	f7 7d f8             	idivl  -0x8(%rbp)
+    1596:	89 d0                	mov    %edx,%eax
+    1598:	5d                   	pop    %rbp
+    1599:	c3                   	retq   
+
+000000000000159a <_Z11_mps32_modujj>:
+    159a:	55                   	push   %rbp
+    159b:	48 89 e5             	mov    %rsp,%rbp
+    159e:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    15a1:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    15a4:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    15a7:	ba 00 00 00 00       	mov    $0x0,%edx
+    15ac:	f7 75 f8             	divl   -0x8(%rbp)
+    15af:	89 d0                	mov    %edx,%eax
+    15b1:	5d                   	pop    %rbp
+    15b2:	c3                   	retq   
+
+00000000000015b3 <_Z11_mps32_multii>:
+    15b3:	55                   	push   %rbp
+    15b4:	48 89 e5             	mov    %rsp,%rbp
+    15b7:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    15ba:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    15bd:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    15c0:	0f af 45 f8          	imul   -0x8(%rbp),%eax
+    15c4:	5d                   	pop    %rbp
+    15c5:	c3                   	retq   
+
+00000000000015c6 <_Z12_mps32_multujj>:
+    15c6:	55                   	push   %rbp
+    15c7:	48 89 e5             	mov    %rsp,%rbp
+    15ca:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    15cd:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    15d0:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    15d3:	0f af 45 f8          	imul   -0x8(%rbp),%eax
+    15d7:	5d                   	pop    %rbp
+    15d8:	c3                   	retq   
+
+00000000000015d9 <_Z11_mps64_multii>:
+    15d9:	55                   	push   %rbp
+    15da:	48 89 e5             	mov    %rsp,%rbp
+    15dd:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    15e0:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    15e3:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    15e6:	48 63 d0             	movslq %eax,%rdx
+    15e9:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    15ec:	48 98                	cltq   
+    15ee:	48 0f af c2          	imul   %rdx,%rax
+    15f2:	5d                   	pop    %rbp
+    15f3:	c3                   	retq   
+
+00000000000015f4 <_Z12_mps64_multujj>:
+    15f4:	55                   	push   %rbp
+    15f5:	48 89 e5             	mov    %rsp,%rbp
+    15f8:	89 7d fc             	mov    %edi,-0x4(%rbp)
+    15fb:	89 75 f8             	mov    %esi,-0x8(%rbp)
+    15fe:	8b 55 fc             	mov    -0x4(%rbp),%edx
+    1601:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    1604:	48 0f af c2          	imul   %rdx,%rax
+    1608:	5d                   	pop    %rbp
+    1609:	c3                   	retq   
+    160a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000001610 <__libc_csu_init>:
+    1610:	41 57                	push   %r15
+    1612:	41 56                	push   %r14
+    1614:	49 89 d7             	mov    %rdx,%r15
+    1617:	41 55                	push   %r13
+    1619:	41 54                	push   %r12
+    161b:	4c 8d 25 8e 17 20 00 	lea    0x20178e(%rip),%r12        # 202db0 <__frame_dummy_init_array_entry>
+    1622:	55                   	push   %rbp
+    1623:	48 8d 2d 8e 17 20 00 	lea    0x20178e(%rip),%rbp        # 202db8 <__init_array_end>
+    162a:	53                   	push   %rbx
+    162b:	41 89 fd             	mov    %edi,%r13d
+    162e:	49 89 f6             	mov    %rsi,%r14
+    1631:	4c 29 e5             	sub    %r12,%rbp
+    1634:	48 83 ec 08          	sub    $0x8,%rsp
+    1638:	48 c1 fd 03          	sar    $0x3,%rbp
+    163c:	e8 e7 ee ff ff       	callq  528 <_init>
+    1641:	48 85 ed             	test   %rbp,%rbp
+    1644:	74 20                	je     1666 <__libc_csu_init+0x56>
+    1646:	31 db                	xor    %ebx,%ebx
+    1648:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+    164f:	00 
+    1650:	4c 89 fa             	mov    %r15,%rdx
+    1653:	4c 89 f6             	mov    %r14,%rsi
+    1656:	44 89 ef             	mov    %r13d,%edi
+    1659:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+    165d:	48 83 c3 01          	add    $0x1,%rbx
+    1661:	48 39 dd             	cmp    %rbx,%rbp
+    1664:	75 ea                	jne    1650 <__libc_csu_init+0x40>
+    1666:	48 83 c4 08          	add    $0x8,%rsp
+    166a:	5b                   	pop    %rbx
+    166b:	5d                   	pop    %rbp
+    166c:	41 5c                	pop    %r12
+    166e:	41 5d                	pop    %r13
+    1670:	41 5e                	pop    %r14
+    1672:	41 5f                	pop    %r15
+    1674:	c3                   	retq   
+    1675:	90                   	nop
+    1676:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+    167d:	00 00 00 
+
+0000000000001680 <__libc_csu_fini>:
+    1680:	f3 c3                	repz retq 
+
+Desmontagem da seção .fini:
+
+0000000000001684 <_fini>:
+    1684:	48 83 ec 08          	sub    $0x8,%rsp
+    1688:	48 83 c4 08          	add    $0x8,%rsp
+    168c:	c3                   	retq   
