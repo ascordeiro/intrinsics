@@ -111,22 +111,22 @@ inline void *_vim2K_imins(__v32s *a, __v32s *b, __v32s *c) {
 
 // 15) 32-bit Move Data Vector-to-Vector  (32 double)
 inline void *_vim64_icpys(__v32s *a, __v32s *b) {
-    for (int i = 0; i < VM64I; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM64I; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 // 16) 32-bit Move Data Vector-to-Vector (1024 double)
 inline void *_vim2K_icpys(__v32s *a, __v32s *b) {
-    for (int i = 0; i < VM2KI; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM2KI; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 // 17) 32-bit Move Data Vector-to-Vector (32 double)
 inline void *_vim64_icpyu(__v32u *a, __v32u *b) {
-    for (int i = 0; i < VM64I; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM64I; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 // 18) 32-bit Move Data Vector-to-Vector (1024 double)
 inline void *_vim2K_icpyu(__v32u *a, __v32u *b) {
-    for (int i = 0; i < VM2KI; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM2KI; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 /****************************************************/
@@ -345,23 +345,23 @@ inline void *_vim1K_imulu(__v64u *a, __v64u *b, __v64u *c) {
     for (int i = 0; i < VM1KL; ++i) {c[i] = a[i] * b[i];} return EXIT_SUCCESS;
 }
 
-// 57) 32-bit Multiply-Add (64 floats)
-inline void *_vim64_imadu(__v32u *a, __v32u *b) {
+// 57) 32-bit Cumulative Sum (64 floats)
+inline void *_vim64_icumu(__v32u *a, __v32u *b) {
     *b = 0; for (int i = 0; i < VM64I; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 
-// 58) 32-bit Multiply-Add (2048 integers)
-inline void *_vim2K_imadu(__v32u *a, __v32u *b) {
+// 58) 32-bit Cumulative Sum (2048 integers)
+inline void *_vim2K_icumu(__v32u *a, __v32u *b) {
     *b = 0; for (int i = 0; i < VM2KI; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 
-// 59) 32-bit Multiply-Add (64 floats)
-inline void *_vim64_imads(__v32s *a, __v32s *b) {
+// 59) 32-bit Cumulative Sum (64 floats)
+inline void *_vim64_icums(__v32s *a, __v32s *b) {
     *b = 0; for (int i = 0; i < VM64I; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 
-// 60) 32-bit Multiply-Add (2048 integers)
-inline void *_vim2K_imads(__v32s *a, __v32s *b) {
+// 60) 32-bit Cumulative Sum (2048 integers)
+inline void *_vim2K_icums(__v32s *a, __v32s *b) {
     *b = 0; for (int i = 0; i < VM2KI; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 
@@ -370,23 +370,23 @@ inline void *_vim2K_imads(__v32s *a, __v32s *b) {
 /****************************************************/
 
 // 61) 32-bit Move Immediate Data (64 integers)
-inline void *_vim64_imovs(__v32s *a, __v32s b) {
-    for (int i = 0; i < VM64I; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim64_imovs(__v32s a, __v32s *b) {
+    for (int i = 0; i < VM64I; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
 
 // 62) 32-bit Move Immediate Data (2048 integers)
-inline void *_vim2K_imovs(__v32s *a, __v32s b) {
-    for (int i = 0; i < VM2KI; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim2K_imovs(__v32s a, __v32s *b) {
+    for (int i = 0; i < VM2KI; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
 
 // 63) 32-bit Move Immediate Data Unsigned (64 integers)
-inline void *_vim64_imovu(__v32u *a, __v32u b) {
-    for (int i = 0; i < VM64I; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim64_imovu(__v32u a, __v32u *b) {
+    for (int i = 0; i < VM64I; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
 
 // 64) 32-bit Move Immediate Data (2048 integers)
-inline void *_vim2K_imovu(__v32u *a, __v32u b) {
-    for (int i = 0; i < VM2KI; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim2K_imovu(__v32u a, __v32u *b) {
+    for (int i = 0; i < VM2KI; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
 
 
@@ -455,12 +455,12 @@ inline void *_vim2K_fmins(__v32f *a, __v32f *b, __v32f *c) {
 
 // 75) 32-bit Move Data Vector-to-Vector (64 floating-point single precision)
 inline void *_vim64_fcpys(__v32f *a, __v32f *b) {
-    for (int i = 0; i < VM64I; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM64I; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 // 76) 32-bit Move Data Vector-to-Vector (2048 floating-point single precision)
 inline void *_vim2K_fcpys(__v32f *a, __v32f *b) {
-    for (int i = 0; i < VM2KI; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM2KI; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 /****************************************************/
@@ -515,13 +515,13 @@ inline void *_vim2K_fmuls(__v32f *a, __v32f *b, __v32f *c) {
     for (int i = 0; i < VM2KI; ++i) {c[i] = a[i] * b[i];} return EXIT_SUCCESS;
 }
 
-// 85) 32-bit Multiply-Add (64 floating-point single precision)
-inline void *_vim64_fmads(__v32f *a, __v32f *b) {
+// 85) 32-bit Cumulative Sum (64 floating-point single precision)
+inline void *_vim64_fcums(__v32f *a, __v32f *b) {
     *b = 0; for (int i = 0; i < VM64I; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 
-// 86) 32-bit Multiply-Add (2048 floating-point single precision)
-inline void *_vim2K_fmads(__v32f *a, __v32f *b) {
+// 86) 32-bit Cumulative Sum (2048 floating-point single precision)
+inline void *_vim2K_fcums(__v32f *a, __v32f *b) {
     *b = 0; for (int i = 0; i < VM2KI; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 
@@ -530,13 +530,13 @@ inline void *_vim2K_fmads(__v32f *a, __v32f *b) {
 /****************************************************/
 
 // 87) 32-bit Move Immediate Data (64 floating-point single precision)
-inline void *_vim64_fmovs(__v32f *a, __v32f b) {
-    for (int i = 0; i < VM64I; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim64_fmovs(__v32f a, __v32f *b) {
+    for (int i = 0; i < VM64I; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
 
 // 88) 32-bit Move Immediate Data (2048 floating-point single precision)
-inline void *_vim2K_fmovs(__v32f *a, __v32f b) {
-    for (int i = 0; i < VM2KI; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim2K_fmovs(__v32f a, __v32f *b) {
+    for (int i = 0; i < VM2KI; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
 
 
@@ -606,12 +606,12 @@ inline void *_vim1K_dmins(__v64d *a, __v64d *b, __v64d *c) {
 
 // 99) 64-bit Move Data Vector-to-Vector (32 floating-point double precision)
 inline void *_vim32_dcpys(__v64d *a, __v64d *b) {
-    for (int i = 0; i < VM32L; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM32L; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 // 100) 64-bit Move Data Vector-to-Vector (1024 floating-point double precision)
 inline void *_vim1K_dcpys(__v64d *a, __v64d *b) {
-    for (int i = 0; i < VM1KL; ++i) {a[i] = b[i];} return EXIT_SUCCESS;
+    for (int i = 0; i < VM1KL; ++i) {b[i] = a[i];} return EXIT_SUCCESS;
 }
 
 /****************************************************/
@@ -666,13 +666,13 @@ inline void *_vim1K_dmuls(__v64d *a, __v64d *b, __v64d *c) {
     for (int i = 0; i < VM1KL; ++i) {c[i] = a[i] * b[i];} return EXIT_SUCCESS;
 }
 
-// 109) 64-bit Multiply-Add (32 floating-point double precision)
-inline void *_vim32_dmads(__v64d *a, __v64d *b) {
+// 109) 64-bit Cumulative Sum (32 floating-point double precision)
+inline void *_vim32_dcums(__v64d *a, __v64d *b) {
     *b = 0; for (int i = 0; i < VM32L; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 
-// 110) 64-bit Multiply-Add (1024 floating-point double precision)
-inline void *_vim1K_dmads(__v64d *a, __v64d *b) {
+// 110) 64-bit Cumulative Sum (1024 floating-point double precision)
+inline void *_vim1K_dcums(__v64d *a, __v64d *b) {
     *b = 0; for (int i = 0; i < VM1KL; ++i) {*b += a[i];} return EXIT_SUCCESS;
 }
 /****************************************************/
@@ -680,11 +680,11 @@ inline void *_vim1K_dmads(__v64d *a, __v64d *b) {
 /****************************************************/
 
 // 111) 64-bit Move Immediate Data (32 floating-point double precision)
-inline void *_vim32_dmovs(__v64d *a, __v64d b) {
-    for (int i = 0; i < VM32L; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim32_dmovs(__v64d a, __v64d *b) {
+    for (int i = 0; i < VM32L; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
 
 // 112) 64-bit Move Immediate Data (1024 floating-point double precision)
-inline void *_vim1K_dmovs(__v64d *a, __v64d b) {
-    for (int i = 0; i < VM1KL; ++i) {a[i] = b;} return EXIT_SUCCESS;
+inline void *_vim1K_dmovs(__v64d a, __v64d *b) {
+    for (int i = 0; i < VM1KL; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
