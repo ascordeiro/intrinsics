@@ -9,6 +9,13 @@
 #include <time.h>
 #include <stdint.h>
 
+#define INLINE_OPT 1
+#if INLINE_OPT == 0
+    #define INLINE __attribute__ ((noinline))
+#else
+    #define INLINE inline
+#endif
+
 #define VM64I 64    // 256B array length to integer type
 #define VM2KI 2048  // 8KB array length to integer type
 #define VM32L 32    // 256B array length to long integer type
@@ -32,7 +39,7 @@ typedef double __v64d; // signed double operand
 /****************************************************/
 
 // 01) 32-bit Add (64 integers)
-void __attribute__ ((noinline)) *_vim64_iadds(__v32s *a, __v32s *b, __v32s *c) {
+void INLINE *_vim64_iadds(__v32s *a, __v32s *b, __v32s *c) {
     for (int i = 0; i < VM64I; ++i) {c[i] = a[i] + b[i];} return EXIT_SUCCESS;
 }
 
