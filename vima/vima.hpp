@@ -9,10 +9,10 @@
 #include <time.h>
 #include <stdint.h>
 
-#define INLINE_OPT 1
-#if INLINE_OPT == 0
+#ifdef NOINLINE
     #define INLINE __attribute__ ((noinline))
-#else
+#endif
+#ifndef NOINLINE
     #define INLINE inline
 #endif
 
