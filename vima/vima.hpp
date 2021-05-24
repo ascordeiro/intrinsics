@@ -700,3 +700,436 @@ void INLINE *_vim32_dmovs(__v64d a, __v64d *b) {
 void INLINE *_vim1K_dmovs(__v64d a, __v64d *b) {
     for (int i = 0; i < VM1KL; ++i) {b[i] = a;} return EXIT_SUCCESS;
 }
+
+
+/****************************************************/
+/*          VIMA Additional instructions             */
+/****************************************************/
+
+// 113) Mask Load (64 32-bit unsigned integers)
+void INLINE *_vim64_ilmku (__v32u* vec, __v32u* mask, __v32u* dst){
+    int count = 0;
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 114) Mask Load (64 32-bit unsigned integers)
+void INLINE *_vim2K_ilmku (__v32u* vec, __v32u* mask, __v32u* dst){
+    int count = 0;
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 115) Mask Load (64 32-bit signed integers)
+void INLINE *_vim64_ilmks (__v32s* vec, __v32u* mask, __v32s* dst){
+    int count = 0;
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 116) Mask Load (64 32-bit signed integers)
+void INLINE *_vim2K_ilmks (__v32s* vec, __v32u* mask, __v32s* dst){
+    int count = 0;
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 117) Mask Load (64 floating-point single precision)
+void INLINE *_vim64_flmks (__v32f* vec, __v32u* mask, __v32f* dst){
+    int count = 0;
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 118) Mask Load (2048 floating-point single precision)
+void INLINE *_vim2K_flmks (__v32f* vec, __v32u* mask, __v32f* dst){
+    int count = 0;
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 119) Mask Load (32 floating-point double precision)
+void INLINE *_vim64_dlmks (__v64d* vec, __v32u* mask, __v64d* dst){
+    int count = 0;
+    for (int i = 0; i < VM32L; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 120) Mask Load (1024 floating-point double precision)
+void INLINE *_vim2K_dlmks (__v64d* vec, __v32u* mask, __v64d* dst){
+    int count = 0;
+    for (int i = 0; i < VM1KL; i++){
+        if (mask[i] == 1) dst[i] = vec[count++];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 113) Mask Store (64 32-bit unsigned integers)
+void INLINE *_vim64_ismku (__v32u* vec, __v32u* mask, __v32u* dst){
+    int count = 0;
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 114) Mask Store (64 32-bit unsigned integers)
+void INLINE *_vim2K_ismku (__v32u* vec, __v32u* mask, __v32u* dst){
+    int count = 0;
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 115) Mask Store (64 32-bit signed integers)
+void INLINE *_vim64_ismks (__v32s* vec, __v32u* mask, __v32s* dst){
+    int count = 0;
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 116) Mask Store (64 32-bit signed integers)
+void INLINE *_vim2K_ismks (__v32s* vec, __v32u* mask, __v32s* dst){
+    int count = 0;
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 117) Mask Store (64 floating-point single precision)
+void INLINE *_vim64_fsmks (__v32f* vec, __v32u* mask, __v32f* dst){
+    int count = 0;
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 118) Mask Store (2048 floating-point single precision)
+void INLINE *_vim2K_fsmks (__v32f* vec, __v32u* mask, __v32f* dst){
+    int count = 0;
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 119) Mask Store (32 floating-point double precision)
+void INLINE *_vim64_dsmks (__v64d* vec, __v32u* mask, __v64d* dst){
+    int count = 0;
+    for (int i = 0; i < VM32L; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 120) Mask Store (1024 floating-point double precision)
+void INLINE *_vim2K_dsmks (__v64d* vec, __v32u* mask, __v64d* dst){
+    int count = 0;
+    for (int i = 0; i < VM1KL; i++){
+        if (mask[i] == 1) dst[count++] = vec[i];
+    }
+    return EXIT_SUCCESS;
+}
+
+// 121) Mask Reset (64 32-bit unsigned integers)
+void INLINE *_vim64_irmku (__v32u* vec, __v32u* mask){
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 122) Mask Reset (64 32-bit unsigned integers)
+void INLINE *_vim2K_irmku (__v32u* vec, __v32u* mask){
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 123) Mask Reset (64 32-bit signed integers)
+void INLINE *_vim64_irmks (__v32s* vec, __v32u* mask){
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 124) Mask Reset (64 32-bit signed integers)
+void INLINE *_vim2K_irmks (__v32s* vec, __v32u* mask){
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 125) Mask Reset (64 floating-point single precision)
+void INLINE *_vim64_frmks (__v32f* vec, __v32u* mask){
+    for (int i = 0; i < VM64I; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 126) Mask Reset (2048 floating-point single precision)
+void INLINE *_vim2K_frmks (__v32f* vec, __v32u* mask){
+    for (int i = 0; i < VM2KI; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 127) Mask Reset (32 floating-point double precision)
+void INLINE *_vim64_drmks (__v64d* vec, __v32u* mask){
+    for (int i = 0; i < VM32L; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 128) Mask Reset (1024 floating-point double precision)
+void INLINE *_vim2K_drmks (__v64d* vec, __v32u* mask){
+    for (int i = 0; i < VM1KL; i++){
+        if (mask[i] == 1) vec[i] = 0;
+    }
+    return EXIT_SUCCESS;
+}
+
+// 129) Permute (64 32-bit unsigned integers)
+void INLINE *_vim64_ipmtu (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 130) Permute (64 32-bit unsigned integers)
+void INLINE *_vim2K_ipmtu (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 131) Permute (64 32-bit signed integers)
+void INLINE *_vim64_ipmts (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 132) Permute (64 32-bit signed integers)
+void INLINE *_vim2K_ipmts (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 133) Permute (64 floating-point single precision)
+void INLINE *_vim64_fpmts (__v32f* vec, __v32u* idx, __v32f* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 134) Permute (2048 floating-point single precision)
+void INLINE *_vim2K_fpmts (__v32f* vec, __v32u* idx, __v32f* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 135) Permute (32 floating-point double precision)
+void INLINE *_vim64_dpmts (__v64d* vec, __v32u* idx, __v64d* dst){
+    for (int i = 0; i < VM32L; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 136) Permute (1024 floating-point double precision)
+void INLINE *_vim2K_dpmts (__v64d* vec, __v32u* idx, __v64d* dst){
+    for (int i = 0; i < VM1KL; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 137) Mod (64 32-bit unsigned integers)
+void INLINE *_vim64_imodu (__v32u* vec, __v32u imm, __v32u* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[i] % imm;
+    return EXIT_SUCCESS;
+}
+
+// 138) Mod (64 32-bit unsigned integers)
+void INLINE *_vim2K_imodu (__v32u* vec, __v32u imm, __v32u* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[i] % imm;
+    return EXIT_SUCCESS;
+}
+
+// 139) Mod (64 32-bit signed integers)
+void INLINE *_vim64_imods (__v32s* vec, __v32u imm, __v32s* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[i] % imm;
+    return EXIT_SUCCESS;
+}
+
+// 140) Mod (64 32-bit signed integers)
+void INLINE *_vim2K_imods (__v32s* vec, __v32u imm, __v32s* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[i] % imm;
+    return EXIT_SUCCESS;
+}
+
+// 141) Gather (64 32-bit unsigned integers)
+void INLINE *_vim64_igtru (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 142) Gather (64 32-bit unsigned integers)
+void INLINE *_vim2K_igtru (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 143) Gather (64 32-bit signed integers)
+void INLINE *_vim64_igtrs (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 144) Gather (64 32-bit signed integers)
+void INLINE *_vim2K_igtrs (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 145) Gather (64 floating-point single precision)
+void INLINE *_vim64_fgtrs (__v32f* vec, __v32u* idx, __v32f* dst){
+    for (int i = 0; i < VM64I; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 146) Gather (2048 floating-point single precision)
+void INLINE *_vim2K_fgtrs (__v32f* vec, __v32u* idx, __v32f* dst){
+    for (int i = 0; i < VM2KI; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 147) Gather (32 floating-point double precision)
+void INLINE *_vim64_dgtrs (__v64d* vec, __v32u* idx, __v64d* dst){
+    for (int i = 0; i < VM32L; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 148) Gather (1024 floating-point double precision)
+void INLINE *_vim2K_dgtrs (__v64d* vec, __v32u* idx, __v64d* dst){
+    for (int i = 0; i < VM1KL; i++) dst[i] = vec[idx[i]];
+    return EXIT_SUCCESS;
+}
+
+// 149) Scatter (64 32-bit unsigned integers)
+void INLINE *_vim64_isctu (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM64I; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 150) Scatter (64 32-bit unsigned integers)
+void INLINE *_vim2K_isctu (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM2KI; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 151) Scatter (64 32-bit signed integers)
+void INLINE *_vim64_iscts (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM64I; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 152) Scatter (64 32-bit signed integers)
+void INLINE *_vim2K_iscts (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM2KI; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 153) Scatter (64 floating-point single precision)
+void INLINE *_vim64_fscts (__v32f* vec, __v32u* idx, __v32f* dst){
+    for (int i = 0; i < VM64I; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 154) Scatter (2048 floating-point single precision)
+void INLINE *_vim2K_fscts (__v32f* vec, __v32u* idx, __v32f* dst){
+    for (int i = 0; i < VM2KI; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 155) Scatter (32 floating-point double precision)
+void INLINE *_vim64_dscts (__v64d* vec, __v32u* idx, __v64d* dst){
+    for (int i = 0; i < VM32L; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 156) Scatter (1024 floating-point double precision)
+void INLINE *_vim2K_dscts (__v64d* vec, __v32u* idx, __v64d* dst){
+    for (int i = 0; i < VM1KL; i++) dst[idx[i]] = vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 157) Dot Product (64 unsigned integers)
+void INLINE *_vim64_idptu (__v32u* vec, __v32u* imm){
+    *imm = 0;
+    for (int i = 0; i < VM64I; i++) *imm += vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 158) Dot Product (2048 unsigned integers)
+void INLINE *_vim2K_idptu (__v32u* vec, __v32u* imm){
+    *imm = 0;
+    for (int i = 0; i < VM2KI; i++) *imm += vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 159) Dot Product (64 signed integers)
+void INLINE *_vim64_idpts (__v32s* vec, __v32s* imm){
+    *imm = 0;
+    for (int i = 0; i < VM64I; i++) *imm += vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 160) Dot Product (2048 signed integers)
+void INLINE *_vim2K_idpts (__v32s* vec, __v32s* imm){
+    *imm = 0;
+    for (int i = 0; i < VM2KI; i++) *imm += vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 161) Scatter OR (64 32-bit unsigned integers)
+void INLINE *_vim64_iscou (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM64I; i++) dst[idx[i]] = dst[idx[i]] | vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 162) Scatter OR (64 32-bit unsigned integers)
+void INLINE *_vim2K_iscou (__v32u* vec, __v32u* idx, __v32u* dst){
+    for (int i = 0; i < VM2KI; i++) dst[idx[i]] = dst[idx[i]] | vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 163) Scatter OR (64 32-bit signed integers)
+void INLINE *_vim64_iscos (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM64I; i++) dst[idx[i]] = dst[idx[i]] | vec[i];
+    return EXIT_SUCCESS;
+}
+
+// 164) Scatter OR (64 32-bit signed integers)
+void INLINE *_vim2K_iscos (__v32s* vec, __v32u* idx, __v32s* dst){
+    for (int i = 0; i < VM2KI; i++) dst[idx[i]] = dst[idx[i]] | vec[i];
+    return EXIT_SUCCESS;
+}
